@@ -11,11 +11,11 @@ import UIKit
 class DetailCell: UITableViewCell {
     @IBOutlet var name: UILabel!
     @IBOutlet var money: UILabel!
-    
 }
 
 class DetailProgressTableViewController: UITableViewController {
     
+    private let log = Logger(logPlace: DetailProgressTableViewController.self)
     private let id = SharedMemoryContext.get(key: contextKey.selectId)
     private let billRepository = BillRepository.sharedInstance
     private let progressNames = ProgressNames()
@@ -29,8 +29,12 @@ class DetailProgressTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return billRepository.getReadKey()[section]
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return progressNames.get.count
+        return billRepository.getReadKey().count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

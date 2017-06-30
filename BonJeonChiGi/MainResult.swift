@@ -10,6 +10,8 @@ import UIKit
 
 class MainResult: UIView {
     
+    private let log = Logger(logPlace: MainResult.self)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .red
@@ -32,8 +34,7 @@ class MainResult: UIView {
     }
     
     func changeProgressData(id:Int) {
-        totalSpendMoney.text = "\(billRepository.findOne(id: id))"
-//        totalSpendMoney.text = "총 지출 : \(billRepository.getSpendMoneyTotal(id: id))원 \n 총 수익 : \(billRepository.getIncomeMoneyTotal(id: id)) 수익 리스트 \(billRepository.getIncomeList(id: id))원 \n  달성율 : ... % \n 남은 횟수 : n번"
+        totalSpendMoney.text = "\(String(describing: billRepository.findOne(id: id)))"
     }
     
     required init?(coder aDecoder: NSCoder) {

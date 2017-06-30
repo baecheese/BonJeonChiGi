@@ -12,7 +12,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet var tableview: UITableView!
     @IBOutlet var progressBack: UIView!
-    
+
+    private let log = Logger(logPlace: MainViewController.self)
     var mainProgress = MainResult()
     private let billRepository = BillRepository.sharedInstance
     

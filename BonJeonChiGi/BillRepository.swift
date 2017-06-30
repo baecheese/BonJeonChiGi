@@ -10,12 +10,13 @@ import UIKit
 import RealmSwift
 
 struct ProgressNames {
-    let list = [ProgressKey.spendMoneyTotal, ProgressKey.incomeMoneyTotal, ProgressKey.incomeMoneyOneTime, ProgressKey.remainingMoney]
     // 이후에 gobal 언어 처리 cheeseing
-    let get = [ProgressKey.spendMoneyTotal:"총 지출", ProgressKey.incomeMoneyTotal:"총 수익", ProgressKey.incomeMoneyOneTime: "한 번 수익", ProgressKey.remainingMoney: "남은 돈"]
+    let get = [ProgressKey.projectName:"프로젝트명", ProgressKey.spendMoneyTotal:"총 지출", ProgressKey.incomeMoneyTotal:"총 수익", ProgressKey.remainingMoney: "남은 돈"]
 }
 
 class BillRepository: NSObject {
+    
+    private let log = Logger(logPlace: BillRepository.self)
     
     private override init() {
         super.init()
@@ -72,11 +73,10 @@ class BillRepository: NSObject {
             }
         }
         catch {
-            print("error")
+            log.error(message: "error")
             return false
         }
-        print("bill : \(bill)")
-
+        log.info(message: "Bill : \(bill)")
         return true
     }
     
@@ -114,15 +114,29 @@ class BillRepository: NSObject {
 //    }
     
     func getWriteKey() -> [String] {
-        let keys = ProgressKey.self
         let names = ProgressNames().get
-        return [names[keys.spendMoneyTotal]!, names[keys.incomeMoneyTotal]!]
+        let keys = [ProgressKey.projectName, ProgressKey.spendMoneyTotal, ProgressKey.incomeMoneyTotal]
+        var writeList = [String]()
+        for key in keys {
+            writeList.append(names[key]!)
+        }
+        return writeList
+    }
+    
+    func getReadKey() -> [String] {
+        let names = ProgressNames().get
+        let keys = [ProgressKey.projectName, ProgressKey.remainingMoney, ProgressKey.spendMoneyTotal, ProgressKey.incomeMoneyTotal]
+        var readList = [String]()
+        for key in keys {
+            readList.append(names[key]!)
+        }
+        return readList
     }
 }
 
 enum ProgressKey {
+    case projectName
     case spendMoneyTotal
     case incomeMoneyTotal
-    case incomeMoneyOneTime
     case remainingMoney
 }

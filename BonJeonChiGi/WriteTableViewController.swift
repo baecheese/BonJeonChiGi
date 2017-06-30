@@ -15,6 +15,7 @@ class WriteCell: UITableViewCell {
 
 class WriteTableViewController: UITableViewController {
     
+    private let log = Logger(logPlace: WriteTableViewController.self)
     private let billRepository = BillRepository.sharedInstance
     
     override func viewDidLoad() {
@@ -44,17 +45,21 @@ class WriteTableViewController: UITableViewController {
             var spend = [String:Int]()
             spend[cell.name.text!] = Int(cell.price.text!)
             if 0 == section {
-                print("name : \(cell.name.text), price : \(cell.price.text)")
+                log.info(message: "name : \(String(describing: cell.name.text)), price : \(String(describing: cell.price.text))")
                 spendList.append(spend)
             }
             if 1 == section {
-                print("name : \(cell.name.text), price : \(cell.price.text)")
+                log.info(message: "name : \(String(describing: cell.name.text)), price : \(String(describing: cell.price.text))")
                 incomeList.append(spend)
             }
         }
         
-        billRepository.saveBill(spends: spendList, incomes: incomeList)
-        print("save")
+        if true == (billRepository.saveBill(spends: spendList, incomes: incomeList)) {
+            log.info(message: "save")
+        }
+        else {
+            log.info(message: "dont save")
+        }
     }
 
     // MARK: - Table view data source
@@ -65,7 +70,17 @@ class WriteTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return billRepository.getWriteKey()[section]
+        return "temp"
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerBounds = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40.0)
+        let sectionView = WriteSection(frame: headerBounds, title: billRepository.getWriteKey()[section], section: section)
+        return sectionView
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,6 +90,9 @@ class WriteTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WriteCell", for: indexPath) as! WriteCell
+        if 0 == indexPath.section {
+            cell.price.alpha = 0.0
+        }
         return cell
     }
     
