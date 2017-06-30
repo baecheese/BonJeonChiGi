@@ -38,7 +38,7 @@ class BillRepository: NSObject {
         return selectedBill[0]
     }
     
-    func saveBill(spends:[[String:Int]], incomes:[[String:Int]]) -> Bool {
+    func saveBill(name:String, spends:[[String:Int]], incomes:[[String:Int]]) -> Bool {
         let bill = Bill()
         var latestId = 0
         do {
@@ -71,6 +71,10 @@ class BillRepository: NSObject {
                 }
                 realm.add(bill)
             }
+        }
+        catch ContentsSaveError.contentsIsEmpty {
+            log.warn(message: "contentsIsEmpty")
+            return false
         }
         catch {
             log.error(message: "error")
@@ -139,4 +143,8 @@ enum ProgressKey {
     case spendMoneyTotal
     case incomeMoneyTotal
     case remainingMoney
+}
+
+enum ContentsSaveError : Error {
+    case contentsIsEmpty
 }

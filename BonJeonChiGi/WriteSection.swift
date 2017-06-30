@@ -9,7 +9,7 @@
 import UIKit
 
 protocol WriteSectionDelegate {
-    func addCell()
+    func addCell(section:Int)
 }
 
 class WriteSection: UIView {
@@ -39,13 +39,13 @@ class WriteSection: UIView {
         
         let addButton = UIButton(frame: CGRect(x: width*0.7, y: 0, width: width*0.3, height: height))
         addButton.setTitle("add", for: .normal)
-        addButton.target(forAction: #selector(WriteSection.add), withSender: UIControlEvents.touchUpInside)
+        addButton.addTarget(self, action: #selector(WriteSection.add), for: UIControlEvents.touchUpInside)
         addButton.backgroundColor = .red
         self.addSubview(addButton)
     }
     
     func add() {
-        delegate?.addCell()
+        delegate?.addCell(section: self.section)
     }
     
 

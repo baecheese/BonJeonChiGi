@@ -13,7 +13,7 @@ class WriteCell: UITableViewCell {
     @IBOutlet var price: UITextField!
 }
 
-class WriteTableViewController: UITableViewController {
+class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     
     private let log = Logger(logPlace: WriteTableViewController.self)
     private let billRepository = BillRepository.sharedInstance
@@ -37,29 +37,53 @@ class WriteTableViewController: UITableViewController {
     }
     
     func save() {
+        if true == isEmptyContents() {
+            log.error(message: "contents empty")
+        }
+        else {
+            let contents = getContents()
+            if true == (billRepository.saveBill(name: contents.0, spends: contents.1, incomes: contents.2)) {
+                log.info(message: "save")
+            }
+            else {
+                log.info(message: "dont save")
+            }
+        }
+    }
+    
+    func getContents() -> (String, [[String:Int]], [[String:Int]]) {
+        var name = ""
         var spendList = [[String:Int]]()
         var incomeList = [[String:Int]]()
         for section in 0...billRepository.getWriteKey().count-1 {
             let indexPath = IndexPath(row: 0, section: section)
             let cell = tableView.cellForRow(at: indexPath) as! WriteCell
             var spend = [String:Int]()
-            spend[cell.name.text!] = Int(cell.price.text!)
+            var income = [String:Int]()
             if 0 == section {
-                log.info(message: "name : \(String(describing: cell.name.text)), price : \(String(describing: cell.price.text))")
-                spendList.append(spend)
+                name = "\(String(describing: cell.name.text))"
             }
             if 1 == section {
-                log.info(message: "name : \(String(describing: cell.name.text)), price : \(String(describing: cell.price.text))")
-                incomeList.append(spend)
+                spend[cell.name.text!] = Int(cell.price.text!)
+                spendList.append(spend)
+            }
+            if 2 == section {
+                income[cell.name.text!] = Int(cell.price.text!)
+                incomeList.append(income)
             }
         }
-        
-        if true == (billRepository.saveBill(spends: spendList, incomes: incomeList)) {
-            log.info(message: "save")
+        return (name, spendList, incomeList)
+    }
+    
+    func isEmptyContents() -> Bool {
+        for section in 0...billRepository.getWriteKey().count-1 {
+            let indexPath = IndexPath(row: 0, section: section)
+            let cell = tableView.cellForRow(at: indexPath) as! WriteCell
+            if true == cell.name.text?.isEmpty || true == cell.name.text?.isEmpty {
+                return true
+            }
         }
-        else {
-            log.info(message: "dont save")
-        }
+        return false
     }
 
     // MARK: - Table view data source
@@ -80,7 +104,12 @@ class WriteTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerBounds = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40.0)
         let sectionView = WriteSection(frame: headerBounds, title: billRepository.getWriteKey()[section], section: section)
+        sectionView.delegate = self
         return sectionView
+    }
+
+    func addCell(section: Int) {
+        print("\(section) add cell")
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
