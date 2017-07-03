@@ -23,6 +23,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         makeNavigationItem()
+        tableView.allowsSelection = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,12 +46,12 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         else {
             let contents = getContents()
             log.info(message: contents)
-            if true == (billRepository.saveBill(name: contents.0, spends: contents.1, incomes: contents.2)) {
-                log.info(message: "save")
-            }
-            else {
-                log.info(message: "dont save")
-            }
+//            if true == (billRepository.saveBill(name: contents.0, spends: contents.1, incomes: contents.2)) {
+//                log.info(message: "save")
+//            }
+//            else {
+//                log.info(message: "dont save")
+//            }
         }
     }
     
@@ -59,20 +60,22 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         var spendList = [[String:Int]]()
         var incomeList = [[String:Int]]()
         for section in 0...billRepository.getWriteKey().count-1 {
-            let indexPath = IndexPath(row: 0, section: section)
+            let indexPath = getIndexPath(section: section)
             let cell = tableView.cellForRow(at: indexPath) as! WriteCell
             var spend = [String:Int]()
             var income = [String:Int]()
-            if 0 == section {
-                name = "\(String(describing: cell.name.text!))"
-            }
-            if 1 == section {
-                spend[cell.name.text!] = Int(cell.price.text!)
-                spendList.append(spend)
-            }
-            if 2 == section {
-                income[cell.name.text!] = Int(cell.price.text!)
-                incomeList.append(income)
+            for row in 0...indexPath.row {
+                if 0 == section {
+                    name = "\(String(describing: cell.name.text!))"
+                }
+                if 1 == section {
+                    spend[cell.name.text!] = Int(cell.price.text!)
+                    spendList.append(spend)
+                }
+                if 2 == section {
+                    income[cell.name.text!] = Int(cell.price.text!)
+                    incomeList.append(income)
+                }
             }
         }
         return (name, spendList, incomeList)
@@ -88,6 +91,17 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         }
         return false
     }
+    
+    func getIndexPath(section:Int) -> IndexPath {
+        if 1 == section {
+            return IndexPath(row: spendItemsCount-1, section: 1)
+        }
+        if 2 == section {
+            return IndexPath(row: incomeItemsCout-1, section: 2)
+        }
+        return IndexPath(row: 0, section: 0)
+    }
+    
 
     // MARK: - Table view data source
 
@@ -148,6 +162,34 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
             cell.price.alpha = 0.0
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        if 0 != indexPath.section {
+            return true
+        }
+        return false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if 0 != indexPath.section {
+            log.info(message: "\(indexPath.section) \(indexPath.row)")
+            deleteContentsInCell(indexPath: indexPath)
+            if 1 == indexPath.section {
+                spendItemsCount -= 1
+            }
+            if 2 == indexPath.section {
+                incomeItemsCout -= 1
+            }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    func deleteContentsInCell(indexPath:IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! WriteCell
+        cell.name.text = nil
+        cell.price.text = nil
     }
     
 }
