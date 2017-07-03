@@ -52,20 +52,22 @@ class BillRepository: NSObject {
                     bill.id = latestId
                 }
                 
+                bill.name = name
+                
                 for oneSpend in spends {
-                    let name = oneSpend.keys.first!
+                    let spendName = oneSpend.keys.first!
                     let money = oneSpend.values.first!
                     let spend = Spend()
-                    spend.spendKey = name
+                    spend.spendKey = spendName
                     spend.spendMoney = money
                     bill.appendSpend(spend: spend)
                 }
                 
                 for oneIncome in incomes {
-                    let name = oneIncome.keys.first!
+                    let incomeName = oneIncome.keys.first!
                     let money = oneIncome.values.first!
                     let income = Income()
-                    income.incomeKey = name
+                    income.incomeKey = incomeName
                     income.incomeMoney = money
                     bill.appendIncome(income: income)
                 }

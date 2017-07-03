@@ -15,9 +15,9 @@ protocol WriteSectionDelegate {
 class WriteSection: UIView {
     
     private let log = Logger(logPlace: WriteSection.self)
+    private var section:Int = 0
+    private var addButton = UIButton()
     var delegate:WriteSectionDelegate?
-    
-    var section:Int = 0
     
     init(frame: CGRect, title:String, section:Int) {
         super.init(frame: frame)
@@ -30,14 +30,15 @@ class WriteSection: UIView {
     }
     
     private func set(title:String) {
-        let width = self.frame.width
+        let offsetX:CGFloat = 20.0
+        let width = self.frame.width - offsetX
         let height = self.frame.height
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width*0.7, height: height))
+        let titleLabel = UILabel(frame: CGRect(x: offsetX, y: 0, width: width*0.7, height: height))
         titleLabel.text = title
         titleLabel.backgroundColor = .blue
         self.addSubview(titleLabel)
         
-        let addButton = UIButton(frame: CGRect(x: width*0.7, y: 0, width: width*0.3, height: height))
+        addButton = UIButton(frame: CGRect(x: titleLabel.frame.width, y: 0, width: width*0.3, height: height))
         addButton.setTitle("add", for: .normal)
         addButton.addTarget(self, action: #selector(WriteSection.add), for: UIControlEvents.touchUpInside)
         addButton.backgroundColor = .red
@@ -46,6 +47,12 @@ class WriteSection: UIView {
     
     func add() {
         delegate?.addCell(section: self.section)
+    }
+    
+    func isHideButton(status:Bool) {
+        if true == status {
+            self.addButton.alpha = 0.0
+        }
     }
     
 

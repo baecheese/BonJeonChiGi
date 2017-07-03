@@ -12,13 +12,11 @@ import RealmSwift
 class Spend: Object {
     dynamic var spendKey:String = ""
     dynamic var spendMoney:Int = 0
-    let bill = LinkingObjects(fromType: Bill.self, property: "spendList")
 }
 
 class Income: Object {
     dynamic var incomeKey:String = ""
     dynamic var incomeMoney:Int = 0
-    let bill = LinkingObjects(fromType: Bill.self, property: "incomeList")
 }
 
 class Bill: Object {

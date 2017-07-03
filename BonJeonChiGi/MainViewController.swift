@@ -1,3 +1,4 @@
+
 //
 //  MainViewController.swift
 //  BonJeonChiGi
@@ -45,9 +46,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        SharedMemoryContext.set(key: contextKey.selectId, setValue: indexPath.row)
-        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailProgressTableViewController") as! DetailProgressTableViewController
-        self.navigationController?.pushViewController(detailVC, animated: true)
+//        SharedMemoryContext.set(key: contextKey.selectId, setValue: indexPath.row)// value 가 ID가 되어야 한다 chesseing
+//        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailProgressTableViewController") as! DetailProgressTableViewController
+//        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func setMainProgress() {
