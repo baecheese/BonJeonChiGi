@@ -86,6 +86,36 @@ class BillRepository: NSObject {
         return true
     }
     
+    func delete(bill:Bill) {
+        try! realm.write {
+            log.debug(message: "\(String(describing: bill)) 삭제")
+            realm.delete(bill)
+        }
+    }
+    
+    func delete(id:Int) {
+        let bill = findOne(id: id)!
+        try! realm.write {
+            log.debug(message: "\(String(describing: bill)) 삭제")
+            realm.delete(bill)
+        }
+    }
+    
+    func getBalanceMoney(bill:Bill) -> Int {
+        var totalSpend = 0
+        var totalIncome = 0
+        
+        for index in 0...bill.spendList.count {
+            totalSpend += bill.spendList[index].spendMoney
+        }
+        
+        for index in 0...bill.incomeList.count {
+            totalIncome += bill.incomeList[index].incomeMoney
+        }
+        
+        return totalSpend - totalIncome
+    }
+    
 //    
 //    func getIncomeKeyList(id:Int) -> [String]? {
 //        let bill = findOne(id: id)

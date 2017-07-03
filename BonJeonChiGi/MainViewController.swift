@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     private let log = Logger(logPlace: MainViewController.self)
     var mainProgress = MainResult()
     private let billRepository = BillRepository.sharedInstance
+    private let allBill = BillRepository.sharedInstance.getAll()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        cell.textLabel?.text = billRepository.getAll()[indexPath.row].name
+        let bill = allBill[indexPath.row]
+        cell.textLabel?.text = bill.name
         cell.accessoryType = .detailDisclosureButton
         return cell
     }
@@ -46,12 +48,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//        SharedMemoryContext.set(key: contextKey.selectId, setValue: indexPath.row)// value 가 ID가 되어야 한다 chesseing
-//        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailProgressTableViewController") as! DetailProgressTableViewController
-//        self.navigationController?.pushViewController(detailVC, animated: true)
+        SharedMemoryContext.set(key: contextKey.selectId, setValue: allBill[indexPath.row].id)
+        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailProgressTableViewController") as! DetailProgressTableViewController
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return true
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if .delete == editingStyle {
+            let bill = billRepository.getAll()[indexPath.row]
+            billRepository.delete(bill: bill)
+            tableView.reloadData()
+        }
+    }
     
     func setMainProgress() {
         mainProgress = MainResult(frame: progressBack.bounds)

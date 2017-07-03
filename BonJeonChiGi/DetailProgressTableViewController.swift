@@ -16,17 +16,43 @@ class DetailCell: UITableViewCell {
 class DetailProgressTableViewController: UITableViewController {
     
     private let log = Logger(logPlace: DetailProgressTableViewController.self)
-    private let id = SharedMemoryContext.get(key: contextKey.selectId)
     private let billRepository = BillRepository.sharedInstance
+    private let bill = BillRepository.sharedInstance.findOne(id: SharedMemoryContext.get(key: contextKey.selectId) as! Int)!
     private let progressNames = ProgressNames()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
+//        makeNavigationItem()
     }
 
+    override func viewDidLayoutSubviews() {
+        if let rect = self.navigationController?.navigationBar.frame {
+            let y = rect.size.height + rect.origin.y
+            self.tableView.contentInset = UIEdgeInsetsMake(y, 0, 0, 0)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func makeNavigationItem()  {
+        let edit = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
+        edit.backgroundColor = .black
+        edit.setTitle("edit", for: .normal)
+        edit.addTarget(self, action: #selector(DetailProgressTableViewController.edit), for: .touchUpInside)
+        let item = UIBarButtonItem(customView: edit)
+        navigationItem.rightBarButtonItem = item
+    }
+    
+    func edit() {
+        log.info(message: "edit")
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return billRepository.getReadKey().count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -34,11 +60,29 @@ class DetailProgressTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return billRepository.getReadKey().count
+        if 2 == section {
+            return bill.spendList.count
+        }
+        if 3 == section {
+            return bill.incomeList.count
+        }
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
+        if 0 == indexPath.section {
+            
+        }
+        if 1 == indexPath.section {
+            
+        }
+        if 2 == indexPath.section {
+            
+        }
+        if 3 == indexPath.section {
+            
+        }
         return cell
     }
 
