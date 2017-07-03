@@ -103,17 +103,17 @@ class BillRepository: NSObject {
     
     func getBalanceMoney(bill:Bill) -> Int {
         var totalSpend = 0
-        var totalIncome = 0
+        var hitTotalIncome = 0
         
-        for index in 0...bill.spendList.count {
-            totalSpend += bill.spendList[index].spendMoney
+        for spend in bill.spendList {
+            totalSpend += spend.spendMoney
         }
         
-        for index in 0...bill.incomeList.count {
-            totalIncome += bill.incomeList[index].incomeMoney
+        for income in bill.incomeList {
+            hitTotalIncome += income.count * income.incomeMoney
         }
         
-        return totalSpend - totalIncome
+        return totalSpend - hitTotalIncome
     }
     
 //    

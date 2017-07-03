@@ -10,7 +10,6 @@ import UIKit
 
 class DetailCell: UITableViewCell {
     @IBOutlet var name: UILabel!
-    @IBOutlet var money: UILabel!
 }
 
 class DetailProgressTableViewController: UITableViewController {
@@ -72,16 +71,16 @@ class DetailProgressTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
         if 0 == indexPath.section {
-            
+            cell.name.text = bill.name
         }
         if 1 == indexPath.section {
-            
+            cell.name.text = "\(billRepository.getBalanceMoney(bill: bill))"
         }
         if 2 == indexPath.section {
-            
+            cell.name.text = "* \(bill.spendList[indexPath.row].spendKey) \(bill.spendList[indexPath.row].spendMoney)"
         }
         if 3 == indexPath.section {
-            
+            cell.name.text = "* \(bill.incomeList[indexPath.row].incomeMoney) : \(bill.incomeList[indexPath.row].incomeMoney)"
         }
         return cell
     }
