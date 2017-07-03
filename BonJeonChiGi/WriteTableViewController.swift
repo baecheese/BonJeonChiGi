@@ -62,11 +62,10 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         var spendList = [[String:Int]]()
         var incomeList = [[String:Int]]()
         for section in 0...billRepository.getWriteKey().count-1 {
-            let indexPath = getIndexPath(section: section)
-            let cell = tableView.cellForRow(at: indexPath) as! WriteCell
-            var spend = [String:Int]()
-            var income = [String:Int]()
-            for _ in 0...indexPath.row {
+            for row in 0...getRowLastIndex(section:section) {
+                var spend = [String:Int]()
+                var income = [String:Int]()
+                let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as! WriteCell
                 if 0 == section {
                     name = "\(String(describing: cell.name.text!))"
                 }
@@ -94,16 +93,15 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         return false
     }
     
-    func getIndexPath(section:Int) -> IndexPath {
+    func getRowLastIndex(section:Int) -> Int {
         if 1 == section {
-            return IndexPath(row: spendItemsCount-1, section: 1)
+            return spendItemsCount - 1
         }
         if 2 == section {
-            return IndexPath(row: incomeItemsCout-1, section: 2)
+            return incomeItemsCout - 1
         }
-        return IndexPath(row: 0, section: 0)
+        return 0
     }
-    
 
     // MARK: - Table view data source
 

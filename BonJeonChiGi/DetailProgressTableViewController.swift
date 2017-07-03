@@ -22,7 +22,7 @@ class DetailProgressTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-//        makeNavigationItem()
+        makeNavigationItem()
     }
 
     override func viewDidLayoutSubviews() {
@@ -77,10 +77,12 @@ class DetailProgressTableViewController: UITableViewController {
             cell.name.text = "\(billRepository.getBalanceMoney(bill: bill))"
         }
         if 2 == indexPath.section {
-            cell.name.text = "* \(bill.spendList[indexPath.row].spendKey) \(bill.spendList[indexPath.row].spendMoney)"
+            let spend = bill.spendList[indexPath.row]
+            cell.name.text = "* \(spend.spendKey) : \(spend.spendMoney)"
         }
         if 3 == indexPath.section {
-            cell.name.text = "* \(bill.incomeList[indexPath.row].incomeMoney) : \(bill.incomeList[indexPath.row].incomeMoney)"
+            let income = bill.incomeList[indexPath.row]
+            cell.name.text = "* \(income.incomeMoney) : \(income.incomeMoney) ⚡️ hit: \(income.count)"
         }
         return cell
     }
