@@ -41,17 +41,19 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     
     func save() {
         if true == isEmptyContents() {
-            log.error(message: "contents empty")
+            showAlert(message: "contents empty!", haveCancel: false, doneHandler: nil, cancelHandler: nil)
         }
         else {
             let contents = getContents()
             log.info(message: contents)
-//            if true == (billRepository.saveBill(name: contents.0, spends: contents.1, incomes: contents.2)) {
-//                log.info(message: "save")
-//            }
-//            else {
-//                log.info(message: "dont save")
-//            }
+            if true == (billRepository.saveBill(name: contents.0, spends: contents.1, incomes: contents.2)) {
+                let main = self.navigationController?.viewControllers.first as? MainViewController
+                main?.tableview.reloadData()
+                self.navigationController?.popViewController(animated: true)
+            }
+            else {
+                showAlert(message: "save error. try again.", haveCancel: false, doneHandler: nil, cancelHandler: nil)
+            }
         }
     }
     
@@ -64,7 +66,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
             let cell = tableView.cellForRow(at: indexPath) as! WriteCell
             var spend = [String:Int]()
             var income = [String:Int]()
-            for row in 0...indexPath.row {
+            for _ in 0...indexPath.row {
                 if 0 == section {
                     name = "\(String(describing: cell.name.text!))"
                 }
@@ -192,4 +194,14 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         cell.price.text = nil
     }
     
+    func showAlert(message:String, haveCancel:Bool, doneHandler:((UIAlertAction) -> Swift.Void)?, cancelHandler:((UIAlertAction) -> Swift.Void)?)
+    {
+        let alertController = UIAlertController(title: "Notice", message:
+            message, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default,handler: doneHandler))
+        if haveCancel {
+            alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default,handler: cancelHandler))
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

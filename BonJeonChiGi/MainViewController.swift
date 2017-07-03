@@ -51,6 +51,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
+    
+    
     func setMainProgress() {
         mainProgress = MainResult(frame: progressBack.bounds)
         mainProgress.setSpendMoneyTotalLabel(id: 0)
