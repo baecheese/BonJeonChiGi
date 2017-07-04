@@ -14,7 +14,7 @@ class MainResult: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .red
+//        self.backgroundColor = .red
     }
     
     private var billRepository = BillRepository.sharedInstance
@@ -22,19 +22,30 @@ class MainResult: UIView {
     
     func setSpendMoneyTotalLabel(id:Int) {
         let width = self.frame.width * 0.6
-        let hight = self.frame.height * 0.5
+        let hight = self.frame.height * 0.25
         let offsetX = self.frame.width/2 - width/2
         let offsetY = self.frame.height/2 - hight/2
         totalSpendMoney.frame = CGRect(x: offsetX, y: offsetY, width: width, height: hight)
-        totalSpendMoney.textAlignment = .center
-        totalSpendMoney.backgroundColor = .blue
+        totalSpendMoney.textAlignment = NSTextAlignment.center
+        totalSpendMoney.font = UIFont.boldSystemFont(ofSize: 20.0)
+//        totalSpendMoney.backgroundColor = .blue
+        
         totalSpendMoney.isEditable = false
         changeProgressData(id: id)
         self.addSubview(totalSpendMoney)
     }
     
     func changeProgressData(id:Int) {
-        totalSpendMoney.text = "\(String(describing: billRepository.findOne(id: id)))"
+        let bill = billRepository.findOne(id: id)
+        let balanceMoney = billRepository.getBalanceMoney(bill: bill!)
+        totalSpendMoney.text = mainMessage(money: balanceMoney)
+    }
+    
+    func mainMessage(money:Int) -> String {
+        if (0 < money) {
+            return "본전을 치기 까지 \n\(money)원이 남았습니다."
+        }
+        return "이미 본전 치셨군요? \n \(money)원 이득 입니다."
     }
     
     required init?(coder aDecoder: NSCoder) {

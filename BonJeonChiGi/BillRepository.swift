@@ -116,38 +116,6 @@ class BillRepository: NSObject {
         return totalSpend - hitTotalIncome
     }
     
-//    
-//    func getIncomeKeyList(id:Int) -> [String]? {
-//        let bill = findOne(id: id)
-//        return bill?.incomeCount
-//    }
-//    
-//    func getSpendList(id:Int) -> [[String:Int]]? {
-//        let bill = findOne(id: id)
-//        return bill?.spendList
-//    }
-//    
-//    func getSpendMoneyTotal(id:Int) -> Int {
-//        let spendList = getSpendList(id: id)
-//        var total = 0
-//        if false == spendList?.isEmpty {
-//            for aSpend in spendList! {
-//                total += aSpend.values.first!
-//            }
-//        }
-//        return total
-//    }
-//    
-//    func getIncomeMoneyTotal(id:Int) -> Int {
-//        let incomeList = getIncomeList(id: id)
-//        var total = 0
-//        if false == incomeList?.isEmpty {
-//            for aIncome in incomeList! {
-//                total += aIncome.values.first!
-//            }
-//        }
-//        return total
-//    }
     
     func getWriteKey() -> [String] {
         let names = ProgressNames().get
