@@ -82,28 +82,52 @@ class DetailProgressTableViewController: UITableViewController {
         }
         if 3 == indexPath.section {
             let income = bill.incomeList[indexPath.row]
-            cell.name.text = "* \(income.incomeKey) : \(income.incomeMoney) ⚡️ hit: \(income.count)"
+            cell.name.text = "* \(income.incomeKey) : \(income.incomeMoney) ⚡️ count: \(income.count)"
             makeHitButton(cell: cell, row: indexPath.row)
         }
         return cell
     }
     
-    var buttons = [UIButton?]()
-    
     func makeHitButton(cell:DetailCell, row:Int) {
         let width:CGFloat = 50.0
-        let hight:CGFloat = cell.contentView.frame.height
+        let height:CGFloat = cell.contentView.frame.height
         let offsetX:CGFloat = cell.contentView.frame.width - width
-        let hitButton = UIButton(frame: CGRect(x: offsetX, y: 0, width: width, height: hight))
-        hitButton.backgroundColor = .red
-        hitButton.tag = row
-        hitButton.addTarget(self, action: #selector(hitBounJon), for: UIControlEvents.touchUpInside)
-        cell.contentView.addSubview(hitButton)
+        
+        let decrease = UIButton(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        let increase = UIButton(frame: CGRect(x: offsetX, y: 0, width: width, height: height))
+        
+        decrease.setTitle("-", for: .normal)
+        increase.setTitle("+", for: .normal)
+        
+        decrease.backgroundColor = .blue
+        increase.backgroundColor = .red
+        
+        decrease.tag = row
+        increase.tag = row
+        
+        decrease.addTarget(self, action: #selector(decreaseCount), for: UIControlEvents.touchUpInside)
+        increase.addTarget(self, action: #selector(increaseCount), for: UIControlEvents.touchUpInside)
+        
+        cell.contentView.addSubview(decrease)
+        cell.contentView.addSubview(increase)
     }
     
-    func hitBounJon(sender:UIButton) {
-        
-        log.info(message: sender.tag)
+    func decreaseCount(sender:UIButton) {
+        if billRepository.editIncomeCount(id: SharedMemoryContext.get(key: contextKey.selectId) as! Int, index: sender.tag, increase: false) {
+            allTableViewReload()
+        }
+    }
+    
+    func increaseCount(sender:UIButton) {
+        if billRepository.editIncomeCount(id: SharedMemoryContext.get(key: contextKey.selectId) as! Int, index: sender.tag, increase: true) {
+            allTableViewReload()
+        }
+    }
+    
+    func allTableViewReload() {
+        tableView.reloadData()
+        let main = self.navigationController?.viewControllers.first as? MainViewController
+        main?.tableview.reloadData()
     }
     
 }

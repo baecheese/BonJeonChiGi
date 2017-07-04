@@ -86,6 +86,40 @@ class BillRepository: NSObject {
         return true
     }
     
+    //
+    func edit(id:Int, name:String, spends:[[String:Int]], incomes:[[String:Int]]) -> Bool {
+//        let bill = findOne(id: id)
+//        do {
+//            try realm.write {
+//                
+//            }
+//        }
+//        catch {
+//            log.error(message: "realm error on")
+//            return false
+//        }
+        return true
+    }
+    
+    func editIncomeCount(id:Int, index:Int, increase:Bool) -> Bool {
+        let bill = findOne(id: id)!
+        do {
+            try realm.write {
+                if true == increase {
+                    bill.incomeList[index].count += 1
+                }
+                if false == increase && 0 < bill.incomeList[index].count {
+                    bill.incomeList[index].count -= 1
+                }
+            }
+        }
+        catch {
+            log.error(message: "realm error on")
+            return false
+        }
+        return true
+    }
+    
     func delete(bill:Bill) {
         try! realm.write {
             log.debug(message: "\(String(describing: bill)) 삭제")
@@ -115,7 +149,6 @@ class BillRepository: NSObject {
         
         return totalSpend - hitTotalIncome
     }
-    
     
     func getWriteKey() -> [String] {
         let names = ProgressNames().get
