@@ -88,16 +88,16 @@ class BillRepository: NSObject {
     
     //
     func edit(id:Int, name:String, spends:[[String:Int]], incomes:[[String:Int]]) -> Bool {
-//        let bill = findOne(id: id)
-//        do {
-//            try realm.write {
-//                
-//            }
-//        }
-//        catch {
-//            log.error(message: "realm error on")
-//            return false
-//        }
+        let bill = findOne(id: id)
+        do {
+            try realm.write {
+
+            }
+        }
+        catch {
+            log.error(message: "realm error on")
+            return false
+        }
         return true
     }
     

@@ -16,6 +16,7 @@ class DetailProgressTableViewController: UITableViewController {
     
     private let log = Logger(logPlace: DetailProgressTableViewController.self)
     private let billRepository = BillRepository.sharedInstance
+    private let id = SharedMemoryContext.get(key: contextKey.selectId) as! Int
     private let bill = BillRepository.sharedInstance.findOne(id: SharedMemoryContext.get(key: contextKey.selectId) as! Int)!
     private let progressNames = ProgressNames()
     
@@ -113,13 +114,13 @@ class DetailProgressTableViewController: UITableViewController {
     }
     
     func decreaseCount(sender:UIButton) {
-        if billRepository.editIncomeCount(id: SharedMemoryContext.get(key: contextKey.selectId) as! Int, index: sender.tag, increase: false) {
+        if billRepository.editIncomeCount(id: id, index: sender.tag, increase: false) {
             allTableViewReload()
         }
     }
     
     func increaseCount(sender:UIButton) {
-        if billRepository.editIncomeCount(id: SharedMemoryContext.get(key: contextKey.selectId) as! Int, index: sender.tag, increase: true) {
+        if billRepository.editIncomeCount(id: id, index: sender.tag, increase: true) {
             allTableViewReload()
         }
     }
@@ -128,6 +129,7 @@ class DetailProgressTableViewController: UITableViewController {
         tableView.reloadData()
         let main = self.navigationController?.viewControllers.first as? MainViewController
         main?.tableview.reloadData()
+        main?.mainProgress.changeProgressData(id: id)
     }
     
 }
