@@ -37,8 +37,13 @@ class MainResult: UIView {
     
     func changeProgressData(id:Int) {
         let bill = billRepository.findOne(id: id)
-        let balanceMoney = billRepository.getBalanceMoney(bill: bill!)
-        totalSpendMoney.text = mainMessage(money: balanceMoney)
+        if nil != bill {
+            let balanceMoney = billRepository.getBalanceMoney(bill: bill!)
+            totalSpendMoney.text = mainMessage(money: balanceMoney)
+        }
+        else {
+            totalSpendMoney.text = "empty"
+        }
     }
     
     func mainMessage(money:Int) -> String {

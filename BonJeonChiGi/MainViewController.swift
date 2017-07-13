@@ -32,14 +32,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return billRepository.getAll().count
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        let bill = allBill[indexPath.row]
-        cell.textLabel?.text = bill.name
-        cell.accessoryType = .detailDisclosureButton
+//        let bill = allBill[indexPath.row]
+//        cell.textLabel?.text = bill.name
+//        cell.accessoryType = .detailDisclosureButton
         return cell
     }
     
@@ -48,9 +48,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        SharedMemoryContext.set(key: contextKey.selectId, setValue: allBill[indexPath.row].id)
-        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailProgressTableViewController") as! DetailProgressTableViewController
-        self.navigationController?.pushViewController(detailVC, animated: true)
+//        SharedMemoryContext.set(key: contextKey.selectId, setValue: allBill[indexPath.row].id)
+//        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailProgressTableViewController") as! DetailProgressTableViewController
+//        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
@@ -60,16 +60,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if .delete == editingStyle {
-            let bill = billRepository.getAll()[indexPath.row]
-            billRepository.delete(bill: bill)
-            tableView.reloadData()
+//            let bill = billRepository.getAll()[indexPath.row]
+//            billRepository.delete(bill: bill)
+//            tableView.reloadData()
         }
     }
     
     func setMainProgress() {
-        mainProgress = MainResult(frame: progressBack.bounds)
-        mainProgress.setSpendMoneyTotalLabel(id: 0)
-        progressBack.addSubview(mainProgress)
+//        mainProgress = MainResult(frame: progressBack.bounds)
+//        mainProgress.setSpendMoneyTotalLabel(id: 0)
+//        progressBack.addSubview(mainProgress)
     }
     
     override func didReceiveMemoryWarning() {

@@ -60,32 +60,32 @@ class DetailProgressTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if 2 == section {
-            return bill.spendList.count
-        }
-        if 3 == section {
-            return bill.incomeList.count
-        }
+//        if 2 == section {
+//            return bill.spendList.count
+//        }
+//        if 3 == section {
+//            return bill.incomeList.count
+//        }
         return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailCell
-        if 0 == indexPath.section {
-            cell.name.text = bill.name
-        }
-        if 1 == indexPath.section {
-            cell.name.text = "\(billRepository.getBalanceMoney(bill: bill))"
-        }
-        if 2 == indexPath.section {
-            let spend = bill.spendList[indexPath.row]
-            cell.name.text = "* \(spend.spendKey) : \(spend.spendMoney)"
-        }
-        if 3 == indexPath.section {
-            let income = bill.incomeList[indexPath.row]
-            cell.name.text = "* \(income.incomeKey) : \(income.incomeMoney) ⚡️ count: \(income.count)"
-            makeHitButton(cell: cell, row: indexPath.row)
-        }
+//        if 0 == indexPath.section {
+//            cell.name.text = bill.name
+//        }
+//        if 1 == indexPath.section {
+//            cell.name.text = "\(billRepository.getBalanceMoney(bill: bill))"
+//        }
+//        if 2 == indexPath.section {
+//            let spend = bill.spendList[indexPath.row]
+//            cell.name.text = "* \(spend.spendKey) : \(spend.spendMoney)"
+//        }
+//        if 3 == indexPath.section {
+//            let income = bill.incomeList[indexPath.row]
+//            cell.name.text = "* \(income.incomeKey) : \(income.incomeMoney) ⚡️ count: \(income.count)"
+//            makeHitButton(cell: cell, row: indexPath.row)
+//        }
         return cell
     }
     
