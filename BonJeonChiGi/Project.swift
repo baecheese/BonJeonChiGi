@@ -30,10 +30,6 @@ class MissionHistroy: Object {
     dynamic var dateList:Double = 0.0//TimeInterval
     dynamic var isSucceseList:Bool = false
     dynamic var comment:String?
-    
-    override class func primaryKey() -> String? {
-        return "id"
-    }
 }
 
 class Project: Object {
@@ -44,6 +40,7 @@ class Project: Object {
     dynamic var cycle:Int = 0
     private var spendList = List<Spend>()
     private var missionList = List<Mission>()
+    dynamic var startDate:Double = 0.0
     
     override class func primaryKey() -> String? {
         return "id"

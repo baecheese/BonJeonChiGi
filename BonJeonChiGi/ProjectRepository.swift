@@ -33,7 +33,7 @@ class ProjectRepository: NSObject {
         return selectedProject[0]
     }
     
-    func saveBill(name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]]) -> Bool {
+    func saveBill(name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]], startDate:Double) -> Bool {
         let project = Project()
         var latestId = 0
         do {
@@ -62,6 +62,9 @@ class ProjectRepository: NSObject {
                     mission.value = oneMission.values.first!
                     project.appendMission(mission: mission)
                 }
+                
+                project.startDate = startDate
+                
                 realm.add(project)
             }
         }
@@ -78,7 +81,7 @@ class ProjectRepository: NSObject {
     }
     
     //
-    func edit(id:Int, name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]]) -> Bool {
+    func edit(id:Int, name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]], startDate:Double) -> Bool {
         let project = findOne(id: id)
         do {
             try realm.write {
@@ -107,4 +110,33 @@ class ProjectRepository: NSObject {
         }
     }
     
+    
+    
+}
+
+struct ProgressNames {
+    // 이후에 gobal 언어 처리 cheeseing
+    let get = [
+        ProgressKey.projectName:"프로젝트명"
+        , ProgressKey.spendTotal:"총 지출"
+        , ProgressKey.missionTotal:"총 수익"
+        , ProgressKey.remaining: "남은 본전"
+        , ProgressKey.unit:"단위"
+        , ProgressKey.cycle:"주기"
+        , ProgressKey.startDate:"시작 날짜"
+    ]
+}
+
+enum ProgressKey {
+    case projectName
+    case spendTotal
+    case missionTotal
+    case remaining
+    case unit
+    case cycle
+    case startDate
+}
+
+enum ContentsSaveError : Error {
+    case contentsIsEmpty
 }

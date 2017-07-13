@@ -9,10 +9,6 @@
 import UIKit
 import RealmSwift
 
-struct ProgressNames {
-    // 이후에 gobal 언어 처리 cheeseing
-    let get = [ProgressKey.projectName:"프로젝트명", ProgressKey.spendMoneyTotal:"총 지출", ProgressKey.incomeMoneyTotal:"총 수익", ProgressKey.remainingMoney: "남은 돈"]
-}
 
 class BillRepository: NSObject {
     
@@ -150,34 +146,23 @@ class BillRepository: NSObject {
         return totalSpend - hitTotalIncome
     }
     
-    func getWriteKey() -> [String] {
-        let names = ProgressNames().get
-        let keys = [ProgressKey.projectName, ProgressKey.spendMoneyTotal, ProgressKey.incomeMoneyTotal]
-        var writeList = [String]()
-        for key in keys {
-            writeList.append(names[key]!)
-        }
-        return writeList
-    }
-    
-    func getReadKey() -> [String] {
-        let names = ProgressNames().get
-        let keys = [ProgressKey.projectName, ProgressKey.remainingMoney, ProgressKey.spendMoneyTotal, ProgressKey.incomeMoneyTotal]
-        var readList = [String]()
-        for key in keys {
-            readList.append(names[key]!)
-        }
-        return readList
-    }
-}
-
-enum ProgressKey {
-    case projectName
-    case spendMoneyTotal
-    case incomeMoneyTotal
-    case remainingMoney
-}
-
-enum ContentsSaveError : Error {
-    case contentsIsEmpty
+//    func getWriteKey() -> [String] {
+//        let names = ProgressNames().get
+//        let keys = [ProgressKey.projectName, ProgressKey.spendMoneyTotal, ProgressKey.incomeMoneyTotal]
+//        var writeList = [String]()
+//        for key in keys {
+//            writeList.append(names[key]!)
+//        }
+//        return writeList
+//    }
+//    
+//    func getReadKey() -> [String] {
+//        let names = ProgressNames().get
+//        let keys = [ProgressKey.projectName, ProgressKey.remainingMoney, ProgressKey.spendMoneyTotal, ProgressKey.incomeMoneyTotal]
+//        var readList = [String]()
+//        for key in keys {
+//            readList.append(names[key]!)
+//        }
+//        return readList
+//    }
 }

@@ -8,6 +8,12 @@
 
 import UIKit
 
+class MainCell: UITableViewCell {
+    @IBOutlet weak var projectName: UILabel!
+    @IBOutlet weak var startDate: UILabel!
+    @IBOutlet weak var achievementRate: UILabel!
+}
+
 class MainTableTableViewController: UITableViewController {
 
     override func viewDidLoad() {
@@ -32,9 +38,10 @@ class MainTableTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath)
-        cell.textLabel?.text = "123"
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainCell
+        cell.projectName.text = "자전거 타기"
+        cell.startDate.text = "시작일 2010.12.30"
+        cell.achievementRate.text = "달성율 20%"
         return cell
     }
 

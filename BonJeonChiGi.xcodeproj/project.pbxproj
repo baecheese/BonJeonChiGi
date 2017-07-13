@@ -86,8 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				0388825D1F176EFF00334E63 /* MainTableTableViewController.swift */,
-				037C816F1ECFE35100D37ACD /* MainViewController.swift */,
 				03177ABC1F04C9BB00886C29 /* WriteTableViewController.swift */,
+				037C816F1ECFE35100D37ACD /* MainViewController.swift */,
 				039E72801F011C1E00DBD0AE /* DetailProgressTableViewController.swift */,
 			);
 			name = Controller;
