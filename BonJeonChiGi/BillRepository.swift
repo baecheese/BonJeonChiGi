@@ -14,14 +14,15 @@ class BillRepository: NSObject {
     
     private let log = Logger(logPlace: BillRepository.self)
     
+    static let sharedInstance:BillRepository = BillRepository()
+    
+    private var realm = try! Realm()
+    
     private override init() {
         super.init()
     }
     
-    static let sharedInstance:BillRepository = BillRepository()
-    private var realm = try! Realm()
-
-    func getAll() -> Results<Bill> {
+    func findAll() -> Results<Bill> {
         let bills:Results<Bill> = realm.objects(Bill.self)
         return bills
     }

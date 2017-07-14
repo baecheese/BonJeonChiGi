@@ -20,7 +20,7 @@ class ProjectRepository: NSObject {
     private var realm = try! Realm()
     
     
-    func getAll() -> Results<Project> {
+    func findAll() -> Results<Project> {
         let prjects:Results<Project> = realm.objects(Project.self)
         return prjects
     }
@@ -33,7 +33,8 @@ class ProjectRepository: NSObject {
         return selectedProject[0]
     }
     
-    func saveBill(name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]], startDate:Double) -> Bool {
+    func save(name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]], startDate:Double) -> Bool {
+        
         let project = Project()
         var latestId = 0
         do {
@@ -112,29 +113,6 @@ class ProjectRepository: NSObject {
     
     
     
-}
-
-struct ProgressNames {
-    // 이후에 gobal 언어 처리 cheeseing
-    let get = [
-        ProgressKey.projectName:"프로젝트명"
-        , ProgressKey.spendTotal:"총 지출"
-        , ProgressKey.missionTotal:"총 수익"
-        , ProgressKey.remaining: "남은 본전"
-        , ProgressKey.unit:"단위"
-        , ProgressKey.cycle:"주기"
-        , ProgressKey.startDate:"시작 날짜"
-    ]
-}
-
-enum ProgressKey {
-    case projectName
-    case spendTotal
-    case missionTotal
-    case remaining
-    case unit
-    case cycle
-    case startDate
 }
 
 enum ContentsSaveError : Error {

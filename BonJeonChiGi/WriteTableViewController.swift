@@ -17,13 +17,17 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     
     private let log = Logger(logPlace: WriteTableViewController.self)
     private let projectRepository = ProjectRepository.sharedInstance
+    private var openPickerIndexPath:IndexPath? = nil
+    private var projectNameSectionCount = 3
     private var spendItemsCount = 1
     private var missionItemsCount = 1
+    
+    private var pickerView = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         makeNavigationItem()
-        tableView.allowsSelection = false
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,8 +136,6 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         let keys = ProgressNames().get
         return [
             keys[ProgressKey.projectName]
-            , keys[ProgressKey.cycle]
-            , keys[ProgressKey.unit]
             , keys[ProgressKey.spendTotal]
             , keys[ProgressKey.missionTotal]
         ]
@@ -141,7 +143,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     
     func addCell(section: Int) {
         print("\(section) add cell")
-        self.tableView.beginUpdates()
+        tableView.beginUpdates()
         if 1 == section {
             self.tableView.insertRows(at: [IndexPath.init(row: spendItemsCount, section: section)], with: .automatic)
             spendItemsCount += 1
@@ -150,7 +152,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
             self.tableView.insertRows(at: [IndexPath.init(row: missionItemsCount, section: section)], with: .automatic)
             missionItemsCount += 1
         }
-        self.tableView.endUpdates()
+        tableView.endUpdates()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -160,48 +162,48 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         if 2 == section {
             return missionItemsCount
         }
-        return 3
+        return projectNameSectionCount
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if nil != openPickerIndexPath && openPickerIndexPath == indexPath {
+            return 100.0
+        }
         return 60.0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WriteCell", for: indexPath) as! WriteCell
-        if true == isProjectNameSection(indexPath: indexPath) {
-            setRowInProjectNameSection(cell: cell, row: indexPath.row)
-        }
+        setRowInProjectNameSection(cell: cell, indexPath: indexPath)
+        cell.selectionStyle = .none
         return cell
     }
     
-    private func isProjectNameSection(indexPath:IndexPath) -> Bool {
+    private func setRowInProjectNameSection(cell: WriteCell, indexPath: IndexPath) {
         if 0 == indexPath.section {
-            return true
-        }
-        return false
-    }
-    
-    private func setRowInProjectNameSection(cell: WriteCell, row:Int) {
-        if 0 == row {
             cell.price.alpha = 0.0
-            return;
-        }
-        else {
-            cell.name.alpha = 0.0
-            cell.price.alpha = 0.0
+            if 0 != indexPath.row {
+                cell.name.alpha = 0.0
+            }
         }
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
-    {
-        if 0 != indexPath.section {
-            return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if 0 == indexPath.section {
+            if 0 != indexPath.row {
+                openPickerIndexPath = indexPath
+                tableView.beginUpdates()
+                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.bottom)
+                tableView.endUpdates()
+            }
         }
-        return false
+        log.info(message: indexPath)
+    
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath
+    ) {
+        
         if 0 != indexPath.section {
             log.info(message: "\(indexPath.section) \(indexPath.row)")
             deleteContentsInCell(indexPath: indexPath)
@@ -230,5 +232,18 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
             alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default,handler: cancelHandler))
         }
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    ////
+    private func getSelectList(kind:ProgressKey) -> [String] {
+        let list = ChoiceList()
+        if kind == ProgressKey.unit {
+            return list.unit
+        }
+        if kind == ProgressKey.cycle {
+            return list.cycle
+        }
+        return ["저장된 리스트가 없습니다."]
     }
 }

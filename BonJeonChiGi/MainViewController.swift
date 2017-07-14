@@ -17,7 +17,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     private let log = Logger(logPlace: MainViewController.self)
     var mainProgress = MainResult()
     private let billRepository = BillRepository.sharedInstance
-    private let allBill = BillRepository.sharedInstance.getAll()
+    private let allBill = BillRepository.sharedInstance.findAll()//
     
     override func viewDidLoad() {
         super.viewDidLoad()
