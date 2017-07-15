@@ -184,7 +184,18 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
             cell.price.alpha = 0.0
             if 0 != indexPath.row {
                 cell.name.alpha = 0.0
+                if 1 == indexPath.row {
+                    cell.backgroundColor = .red
+                }
+                else {
+                    cell.backgroundColor = .orange
+                }
             }
+        }
+        else {
+            cell.name.alpha = 1.0
+            cell.price.alpha = 1.0
+            cell.backgroundColor = .clear
         }
     }
     
@@ -201,9 +212,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath
-    ) {
-        
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if 0 != indexPath.section {
             log.info(message: "\(indexPath.section) \(indexPath.row)")
             deleteContentsInCell(indexPath: indexPath)
