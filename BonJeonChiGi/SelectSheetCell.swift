@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectSheetCell: UITableViewCell, UIPickerViewDelegate {
+class SelectSheetCell: UITableViewCell {
 
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var value: UILabel!

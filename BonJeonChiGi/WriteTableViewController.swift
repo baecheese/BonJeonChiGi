@@ -13,12 +13,12 @@ class WriteCell: UITableViewCell {
     @IBOutlet var price: UITextField!
 }
 
-class WriteTableViewController: UITableViewController, WriteSectionDelegate {
+class WriteTableViewController: UITableViewController, WriteSectionDelegate, WriteTableViewCellDelegate {
     
     private let log = Logger(logPlace: WriteTableViewController.self)
     private let projectRepository = ProjectRepository.sharedInstance
     private var callPickerIndexPath:IndexPath? = nil
-    private var projectNameSectionCount = 3
+    private var projectNameSectionCount = 4
     private var spendItemsCount = 1
     private var missionItemsCount = 1
     
@@ -27,7 +27,6 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         makeNavigationItem()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -173,10 +172,14 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if 0 == indexPath.section {
+        if 0 == indexPath.section && 0 != indexPath.row {
             return setProjectNameSectionCell(indexPath: indexPath)
         }
         let writeTableViewCell = Bundle.main.loadNibNamed("WriteTableViewCell", owner: self, options: nil)?.first as! WriteTableViewCell
+        if 0 == indexPath.section && 0 == indexPath.row {
+            writeTableViewCell.value.alpha = 0.0
+        }
+        writeTableViewCell.delegate = self
         writeTableViewCell.selectionStyle = .none
         return writeTableViewCell
     }
@@ -184,22 +187,29 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     func setProjectNameSectionCell(indexPath:IndexPath) -> UITableViewCell {
          if callPickerIndexPath != nil {
             if indexPath.row == callPickerIndexPath!.row + 1 {
-                //test
                 let pickerCell = Bundle.main.loadNibNamed("PickerViewTableViewCell", owner: self, options: nil)?.first as! PickerViewTableViewCell
                 return pickerCell
             }
         }
         let selectSheetCell = Bundle.main.loadNibNamed("SelectSheetCell", owner: self, options: nil)?.first as! SelectSheetCell
+        selectSheetCell.selectionStyle = .none
         return selectSheetCell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.view.endEditing(true)
         if 0 == indexPath.section && 0 != indexPath.row {
             if callPickerIndexPath != indexPath {
                 showPickerView(indexPath: indexPath)
                 return;
             }
         }
+        if nil != callPickerIndexPath {
+            closeBeforePickerView()
+        }
+    }
+    
+    func startEditingToTextField() {
         if nil != callPickerIndexPath {
             closeBeforePickerView()
         }
