@@ -31,6 +31,8 @@
 		039E72831F011D4C00DBD0AE /* SharedMemoryContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039E72821F011D4C00DBD0AE /* SharedMemoryContext.swift */; };
 		03E7C5951F1F26F400B60525 /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E7C5931F1F26F400B60525 /* PickerViewTableViewCell.swift */; };
 		03E7C5961F1F26F400B60525 /* PickerViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E7C5941F1F26F400B60525 /* PickerViewTableViewCell.xib */; };
+		03E7C59F1F1F537300B60525 /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E7C59D1F1F537300B60525 /* DateTableViewCell.swift */; };
+		03E7C5A01F1F537300B60525 /* DateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E7C59E1F1F537300B60525 /* DateTableViewCell.xib */; };
 		268CAC41AE6F3EE0D469867B /* Pods_BonJeonChiGi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454C783BAFA8E310ED3BFF13 /* Pods_BonJeonChiGi.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +63,8 @@
 		039E72821F011D4C00DBD0AE /* SharedMemoryContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedMemoryContext.swift; sourceTree = "<group>"; };
 		03E7C5931F1F26F400B60525 /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		03E7C5941F1F26F400B60525 /* PickerViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewTableViewCell.xib; sourceTree = "<group>"; };
+		03E7C59D1F1F537300B60525 /* DateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
+		03E7C59E1F1F537300B60525 /* DateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTableViewCell.xib; sourceTree = "<group>"; };
 		454C783BAFA8E310ED3BFF13 /* Pods_BonJeonChiGi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BonJeonChiGi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB34741F834897970CC33E1 /* Pods-BonJeonChiGi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BonJeonChiGi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BonJeonChiGi/Pods-BonJeonChiGi.debug.xcconfig"; sourceTree = "<group>"; };
 		EEF39CE85D21E29E6901F740 /* Pods-BonJeonChiGi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BonJeonChiGi.release.xcconfig"; path = "Pods/Target Support Files/Pods-BonJeonChiGi/Pods-BonJeonChiGi.release.xcconfig"; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				032809F11F1DEE0300958614 /* SelectSheetCell.xib */,
 				03E7C5931F1F26F400B60525 /* PickerViewTableViewCell.swift */,
 				03E7C5941F1F26F400B60525 /* PickerViewTableViewCell.xib */,
+				03E7C59D1F1F537300B60525 /* DateTableViewCell.swift */,
+				03E7C59E1F1F537300B60525 /* DateTableViewCell.xib */,
 			);
 			name = "Custom Cell";
 			sourceTree = "<group>";
@@ -249,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				037C81681ECFE25400D37ACD /* LaunchScreen.storyboard in Resources */,
+				03E7C5A01F1F537300B60525 /* DateTableViewCell.xib in Resources */,
 				032809F31F1DEE0300958614 /* SelectSheetCell.xib in Resources */,
 				037C81651ECFE25400D37ACD /* Assets.xcassets in Resources */,
 				037C81631ECFE25400D37ACD /* Main.storyboard in Resources */,
@@ -320,6 +327,7 @@
 				03177AC11F060E1500886C29 /* WriteSection.swift in Sources */,
 				03E7C5951F1F26F400B60525 /* PickerViewTableViewCell.swift in Sources */,
 				032809E91F18E5C800958614 /* TestSave.swift in Sources */,
+				03E7C59F1F1F537300B60525 /* DateTableViewCell.swift in Sources */,
 				03177ABD1F04C9BB00886C29 /* WriteTableViewController.swift in Sources */,
 				0388825E1F176EFF00334E63 /* MainTableTableViewController.swift in Sources */,
 				032809F21F1DEE0300958614 /* SelectSheetCell.swift in Sources */,

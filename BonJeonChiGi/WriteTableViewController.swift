@@ -186,8 +186,12 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     
     func setProjectNameSectionCell(indexPath:IndexPath) -> UITableViewCell {
          if callPickerIndexPath != nil {
-            if indexPath.row == callPickerIndexPath!.row + 1 {
+            if 1 == callPickerIndexPath?.row && indexPath.row == callPickerIndexPath!.row + 1 {
+                let datePickerCell = Bundle.main.loadNibNamed("DateTableViewCell", owner: self, options: nil)?.first as! DateTableViewCell
+                return datePickerCell
+            } else {
                 let pickerCell = Bundle.main.loadNibNamed("PickerViewTableViewCell", owner: self, options: nil)?.first as! PickerViewTableViewCell
+                pickerCell.set(progressKey: getSelectList(indexPath: indexPath))
                 return pickerCell
             }
         }
@@ -196,7 +200,21 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         return selectSheetCell
     }
     
+    private func getSelectList(indexPath:IndexPath) -> ProgressKey {
+        if 1 == callPickerIndexPath?.row {
+            return ProgressKey.startDate
+        }
+        if 2 == callPickerIndexPath?.row {
+            return ProgressKey.cycle
+        }
+        if 3 == callPickerIndexPath?.row {
+            return ProgressKey.unit
+        }
+        return ProgressKey.error
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        log.info(message: indexPath)
         self.view.endEditing(true)
         if 0 == indexPath.section && 0 != indexPath.row {
             if callPickerIndexPath != indexPath {

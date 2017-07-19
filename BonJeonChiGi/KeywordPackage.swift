@@ -29,9 +29,11 @@ enum ProgressKey {
     case unit
     case cycle
     case startDate
+    case error
 }
 
 struct ChoiceList {
+    let error = ["지정되지 않은 리스트 입니다."]
     let unit = ["₩", "km", "횟수", "사용자 지정"]
     let cycle = ["없음", "매일", "매주", "매달", "사용자 지정"]
 }
