@@ -17,7 +17,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
     
     private let log = Logger(logPlace: WriteTableViewController.self)
     private let projectRepository = ProjectRepository.sharedInstance
-    private var openPickerIndexPath:IndexPath? = nil
+    private var callPickerIndexPath:IndexPath? = nil
     private var projectNameSectionCount = 3
     private var spendItemsCount = 1
     private var missionItemsCount = 1
@@ -162,55 +162,66 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate {
         if 2 == section {
             return missionItemsCount
         }
+        if callPickerIndexPath != nil {
+            return projectNameSectionCount + 1
+        }
         return projectNameSectionCount
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if nil != openPickerIndexPath && openPickerIndexPath == indexPath {
-            return 100.0
-        }
         return 60.0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WriteCell", for: indexPath) as! WriteCell
-        setRowInProjectNameSection(cell: cell, indexPath: indexPath)
-        cell.selectionStyle = .none
-        return cell
+        if 0 == indexPath.section {
+            return setProjectNameSectionCell(indexPath: indexPath)
+        }
+        let writeTableViewCell = Bundle.main.loadNibNamed("WriteTableViewCell", owner: self, options: nil)?.first as! WriteTableViewCell
+        writeTableViewCell.selectionStyle = .none
+        return writeTableViewCell
     }
     
-    private func setRowInProjectNameSection(cell: WriteCell, indexPath: IndexPath) {
-        if 0 == indexPath.section {
-            cell.price.alpha = 0.0
-            if 0 != indexPath.row {
-                cell.name.alpha = 0.0
-                if 1 == indexPath.row {
-                    cell.backgroundColor = .red
-                }
-                else {
-                    cell.backgroundColor = .orange
-                }
+    func setProjectNameSectionCell(indexPath:IndexPath) -> UITableViewCell {
+         if callPickerIndexPath != nil {
+            if indexPath.row == callPickerIndexPath!.row + 1 {
+                //test
+                let pickerCell = Bundle.main.loadNibNamed("PickerViewTableViewCell", owner: self, options: nil)?.first as! PickerViewTableViewCell
+                return pickerCell
             }
         }
-        else {
-            cell.name.alpha = 1.0
-            cell.price.alpha = 1.0
-            cell.backgroundColor = .clear
-        }
+        let selectSheetCell = Bundle.main.loadNibNamed("SelectSheetCell", owner: self, options: nil)?.first as! SelectSheetCell
+        return selectSheetCell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if 0 == indexPath.section {
-            if 0 != indexPath.row {
-                openPickerIndexPath = indexPath
-                tableView.beginUpdates()
-                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.bottom)
-                tableView.endUpdates()
+        if 0 == indexPath.section && 0 != indexPath.row {
+            if callPickerIndexPath != indexPath {
+                showPickerView(indexPath: indexPath)
+                return;
             }
         }
-        log.info(message: indexPath)
-    
+        if nil != callPickerIndexPath {
+            closeBeforePickerView()
+        }
     }
+    
+    func showPickerView(indexPath:IndexPath) {
+        if nil != callPickerIndexPath {
+            closeBeforePickerView()
+            return;
+        }
+        tableView.beginUpdates()
+        self.tableView.insertRows(at: [IndexPath.init(row: indexPath.row + 1, section: indexPath.section)], with: .automatic)
+        callPickerIndexPath = IndexPath(row: indexPath.row, section: indexPath.section)
+        tableView.endUpdates()
+    }
+    
+    func closeBeforePickerView() {
+        let pickerIndexPath = IndexPath(row: callPickerIndexPath!.row + 1, section: callPickerIndexPath!.section)
+        callPickerIndexPath = nil
+        tableView.deleteRows(at: [pickerIndexPath], with: .fade)
+    }
+
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if 0 != indexPath.section {

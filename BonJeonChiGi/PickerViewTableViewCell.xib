@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PickerViewTableViewCell" rowHeight="118" id="KGk-i7-Jjw" customClass="PickerViewTableViewCell" customModule="BonJeonChiGi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uxe-7p-1Hx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
+                    </pickerView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="uxe-7p-1Hx" secondAttribute="bottom" id="5tF-G0-gp4"/>
+                    <constraint firstItem="uxe-7p-1Hx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="K9f-OL-RcG"/>
+                    <constraint firstAttribute="trailing" secondItem="uxe-7p-1Hx" secondAttribute="trailing" id="elS-MY-mZI"/>
+                    <constraint firstItem="uxe-7p-1Hx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zLg-g0-PPD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="pickerView" destination="uxe-7p-1Hx" id="c9q-N3-OJG"/>
+            </connections>
+            <point key="canvasLocation" x="25" y="89"/>
+        </tableViewCell>
+    </objects>
+</document>
