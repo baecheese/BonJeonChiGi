@@ -16,14 +16,9 @@ class Spend: Object {
 }
 
 class Mission: Object {
-    private dynamic var id:Int = 0
     dynamic var name:String = ""
     dynamic var value:Double = 0.0
     var history = List<MissionHistroy>()
-    
-    override class func primaryKey() -> String? {
-        return "id"
-    }
 }
 
 class MissionHistroy: Object {

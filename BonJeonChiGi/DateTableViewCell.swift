@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DatePickerCellDelegate {
-    func changeDatePickerCell(date:String)
+    func changeDatePickerCell(date:TimeInterval)
 }
 
 class DateTableViewCell: UITableViewCell, UIPickerViewDelegate {
@@ -27,8 +27,7 @@ class DateTableViewCell: UITableViewCell, UIPickerViewDelegate {
     }
     
     func dateChanged(_ sender:UIDatePicker) {
-        delegate?.changeDatePickerCell(date: TimeInterval().getYYMMDD(date: sender.date))
-        print(TimeInterval().getYYMMDD(date: sender.date))
+        delegate?.changeDatePickerCell(date: sender.date.timeIntervalSince1970)
     }
     
     

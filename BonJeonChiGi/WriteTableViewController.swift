@@ -8,16 +8,14 @@
 
 import UIKit
 
-class WriteCell: UITableViewCell {
-    @IBOutlet var name: UITextField!
-    @IBOutlet var price: UITextField!
-}
-
 class WriteTableViewController: UITableViewController, WriteSectionDelegate, WriteTableViewCellDelegate, PickerCellDelegate, DatePickerCellDelegate {
     
     private let log = Logger(logPlace: WriteTableViewController.self)
     private let projectRepository = ProjectRepository.sharedInstance
     private var callPickerIndexPath:IndexPath? = nil
+    private var selectDate = TimeInterval().now()
+    private var selectCycle = 0
+    private var selectUnit = "₩"
     private var projectNameSectionCount = 4
     private var spendItemsCount = 1
     private var missionItemsCount = 1
@@ -43,69 +41,97 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     }
     
     func save() {
-//        if true == isEmptyContents() {
-//            showAlert(message: "contents empty!", haveCancel: false, doneHandler: nil, cancelHandler: nil)
-//        }
-//        else {
-//            let contents = getContents()
-//            log.info(message: contents)
-//            if true == (billRepository.saveBill(name: contents.0, spends: contents.1, incomes: contents.2)) {
-//                let main = self.navigationController?.viewControllers.first as? MainViewController
-//                main?.tableview.reloadData()
-//                self.navigationController?.popViewController(animated: true)
-//            }
-//            else {
-//                showAlert(message: "save error. try again.", haveCancel: false, doneHandler: nil, cancelHandler: nil)
-//            }
-//        }
+        let contents = getContents()
+        if false == contents.0 {
+            showAlert(message: "contents empty!", haveCancel: false, doneHandler: nil, cancelHandler: nil)
+        }
+        else {
+            let content = (contents.1)!
+            let project = creatProject(content: content)
+            if true == projectRepository.save(project: project) {
+                let main = self.navigationController?.viewControllers.first as? MainViewController
+                main?.tableview.reloadData()
+                self.navigationController?.popViewController(animated: true)
+            }
+            else {
+                showAlert(message: "save error. try again.", haveCancel: false, doneHandler: nil, cancelHandler: nil)
+            }
+        }
     }
     
-//    func getContents() -> (String, [[String:Int]], [[String:Int]]) {
-//        var name = ""
-//        var spendList = [[String:Int]]()
-//        var incomeList = [[String:Int]]()
-//        for section in 0...billRepository.getWriteKey().count-1 {
-//            for row in 0...getRowLastIndex(section:section) {
-//                var spend = [String:Int]()
-//                var income = [String:Int]()
-//                let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as! WriteCell
-//                if 0 == section {
-//                    name = "\(String(describing: cell.name.text!))"
-//                }
-//                if 1 == section {
-//                    spend[cell.name.text!] = Int(cell.price.text!)
-//                    spendList.append(spend)
-//                }
-//                if 2 == section {
-//                    income[cell.name.text!] = Int(cell.price.text!)
-//                    incomeList.append(income)
-//                }
-//            }
-//        }
-//        return (name, spendList, incomeList)
-//    }
+    func creatProject(content:[ProgressKey:Any]) -> Project {
+        let project = Project()
+        project.name = content[ProgressKey.projectName] as! String
+        project.startDate = content[ProgressKey.startDate] as! Double
+        project.cycle = content[ProgressKey.cycle] as! Int
+        project.unit = content[ProgressKey.unit] as! String
+        
+        let spendList = content[ProgressKey.spendTotal] as! [[String]]
+        let missionList = content[ProgressKey.missionTotal] as! [[String]]
+        
+        for spendInfo in spendList {
+            let spend = Spend()
+            spend.name = spendInfo[0]
+            spend.value = Double(spendInfo[1])!
+            project.appendSpend(spend: spend)
+        }
+        
+        for missionInfo in missionList {
+            let mission = Mission()
+            mission.name = missionInfo[0]
+            mission.value = Double(missionInfo[1])!
+            project.appendMission(mission: mission)
+        }
+        
+        
+        return project
+    }
     
-//    func isEmptyContents() -> Bool {
-//        for section in 0...billRepository.getWriteKey().count-1 {
-//            let indexPath = IndexPath(row: 0, section: section)
-//            let cell = tableView.cellForRow(at: indexPath) as! WriteCell
-//            if true == cell.name.text?.isEmpty || true == cell.name.text?.isEmpty {
-//                return true
-//            }
-//        }
-//        return false
-//    }
+    func getContents() -> (Bool, [ProgressKey:Any]?) {
+        var result = [ProgressKey:Any]()
+        var spendList = [[String?]]()
+        var missionList = [[String?]]()
+        let rowCountList = [projectNameSectionCount, spendItemsCount, missionItemsCount]
+        for section in 0...getWriteKeys().count-1 {
+            for row in 0...rowCountList[section]-1 {
+                // project setting
+                if 0 == section {
+                    if 0 == row {
+                        let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as! WriteTableViewCell
+                        if true == (cell.name.text?.isEmpty) {
+                            return (false, nil)
+                        }
+                        result[ProgressKey.projectName] = cell.name.text
+                    }
+                }
+                // detail info
+                else {
+                    let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as! WriteTableViewCell
+                    
+                    if true == (cell.name.text?.isEmpty) || true == (cell.value.text?.isEmpty) {
+                        return (false, nil)
+                    }
+                    
+                    let info = [cell.name.text, cell.value.text]
+                    if 1 == section {
+                        spendList.append(info)
+                    }
+                    if 2 == section {
+                        missionList.append(info)
+                    }
+                }
+            }
+            result[ProgressKey.startDate] = selectDate
+            result[ProgressKey.cycle] = selectCycle
+            result[ProgressKey.unit] = selectUnit
+            result[ProgressKey.spendTotal] = spendList
+            result[ProgressKey.missionTotal] = missionList
+            
+        }
+        
+        return (true, result)
+    }
     
-//    func getRowLastIndex(section:Int) -> Int {
-//        if 1 == section {
-//            return spendItemsCount - 1
-//        }
-//        if 2 == section {
-//            return incomeItemsCout - 1
-//        }
-//        return 0
-//    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -196,17 +222,17 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
             else {
                 let pickerCell = Bundle.main.loadNibNamed("PickerViewTableViewCell", owner: self, options: nil)?.first as! PickerViewTableViewCell
                 pickerCell.delegate = self
-                pickerCell.set(progressKey: getSelectList(indexPath: indexPath))
+                pickerCell.set(progressKey: getSelectSheetTitleToCall())
                 return pickerCell
             }
         }
         let selectSheetCell = Bundle.main.loadNibNamed("SelectSheetCell", owner: self, options: nil)?.first as! SelectSheetCell
         selectSheetCell.selectionStyle = .none
-        changeInfoSelectCell(cell: selectSheetCell, indexPath: indexPath)
+        setInfoSelectCell(cell: selectSheetCell, indexPath: indexPath)
         return selectSheetCell
     }
     
-    private func changeInfoSelectCell(cell:SelectSheetCell, indexPath:IndexPath) {
+    private func setInfoSelectCell(cell:SelectSheetCell, indexPath:IndexPath) {
         let names = ProgressNames().get
         if 1 == indexPath.row {
             cell.name.text = names[ProgressKey.startDate]
@@ -222,7 +248,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         }
     }
     
-    private func getSelectList(indexPath:IndexPath) -> ProgressKey {
+    private func getSelectSheetTitleToCall() -> ProgressKey {
         if 1 == callPickerIndexPath?.row {
             return ProgressKey.startDate
         }
@@ -235,11 +261,25 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         return ProgressKey.error
     }
     
+    private func getSelectSheetTitle(row:Int) -> ProgressKey {
+        if 1 == row {
+            return ProgressKey.startDate
+        }
+        if 2 == row {
+            return ProgressKey.cycle
+        }
+        if 3 == row {
+            return ProgressKey.unit
+        }
+        return ProgressKey.error
+    }
+    
     // date picker
-    func changeDatePickerCell(date: String) {
+    func changeDatePickerCell(date:TimeInterval) {
         if nil != callPickerIndexPath {
             let cell = tableView.cellForRow(at: callPickerIndexPath!) as! SelectSheetCell
-            cell.value.text = date
+            selectDate = date
+            cell.value.text = date.getYYMMDD()
         }
     }
     
@@ -249,9 +289,11 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
             var info = ""
             if 2 == callPickerIndexPath?.row {
                 info = ChoiceList().cycle[selectRow]
+                selectCycle = ChoiceList().cycleNumber[selectRow]
             }
             if 3 == callPickerIndexPath?.row {
                 info = ChoiceList().unit[selectRow]
+                selectUnit = info
             }
             let cell = tableView.cellForRow(at: callPickerIndexPath!) as! SelectSheetCell
             cell.value.text = info
@@ -326,16 +368,4 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         self.present(alertController, animated: true, completion: nil)
     }
     
-    
-    ////
-    private func getSelectList(kind:ProgressKey) -> [String] {
-        let list = ChoiceList()
-        if kind == ProgressKey.unit {
-            return list.unit
-        }
-        if kind == ProgressKey.cycle {
-            return list.cycle
-        }
-        return ["저장된 리스트가 없습니다."]
-    }
 }

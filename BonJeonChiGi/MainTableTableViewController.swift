@@ -16,9 +16,13 @@ class MainCell: UITableViewCell {
 
 class MainTableTableViewController: UITableViewController {
 
+    
+    let log = Logger(logPlace: MainTableTableViewController.self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("\(ProjectRepository.sharedInstance.findAll())")
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

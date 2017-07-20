@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class ProjectRepository: NSObject {
-    private let log = Logger(logPlace: BillRepository.self)
+    private let log = Logger(logPlace: ProjectRepository.self)
     
     private override init() {
         super.init()
@@ -33,38 +33,18 @@ class ProjectRepository: NSObject {
         return selectedProject[0]
     }
     
-    func save(name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]], startDate:Double) -> Bool {
-        
-        let project = Project()
+    func save(project:Project) -> Bool {
         var latestId = 0
         do {
             try realm.write {
                 if (false == realm.isEmpty) {
-                    latestId = (realm.objects(Bill.self).max(ofProperty: "id") as Int?)!
+                    latestId = (realm.objects(Project.self).max(ofProperty: "id") as Int?)!
                     latestId += 1
                     project.id = latestId
                 }
                 else if (true == realm.isEmpty) {
                     project.id = latestId
                 }
-                
-                project.name = name
-                
-                for oneSpend in spends {
-                    let spend = Spend()
-                    spend.name = oneSpend.keys.first!
-                    spend.value = oneSpend.values.first!
-                    project.appendSpend(spend: spend)
-                }
-                
-                for oneMission in missions {
-                    let mission = Mission()
-                    mission.name = oneMission.keys.first!
-                    mission.value = oneMission.values.first!
-                    project.appendMission(mission: mission)
-                }
-                
-                project.startDate = startDate
                 
                 realm.add(project)
             }
