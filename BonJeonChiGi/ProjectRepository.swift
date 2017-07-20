@@ -76,18 +76,18 @@ class ProjectRepository: NSObject {
         return true
     }
     
-    func delete(prject:Project) {
+    func delete(project:Project) {
         try! realm.write {
-            log.debug(message: "\(String(describing: prject)) 삭제")
-            realm.delete(prject)
+            log.debug(message: "\(String(describing: project)) 삭제")
+            realm.delete(project)
         }
     }
     
     func delete(id:Int) {
-        let bill = findOne(id: id)!
+        let project = findOne(id: id)!
         try! realm.write {
-            log.debug(message: "\(String(describing: bill)) 삭제")
-            realm.delete(bill)
+            log.debug(message: "\(String(describing: project)) 삭제")
+            realm.delete(project)
         }
     }
     

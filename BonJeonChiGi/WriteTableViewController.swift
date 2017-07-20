@@ -49,8 +49,8 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
             let content = (contents.1)!
             let project = creatProject(content: content)
             if true == projectRepository.save(project: project) {
-                let main = self.navigationController?.viewControllers.first as? MainViewController
-                main?.tableview.reloadData()
+                let main = self.navigationController?.viewControllers.first as! MainTableTableViewController
+                main.tableView.reloadData()
                 self.navigationController?.popViewController(animated: true)
             }
             else {
