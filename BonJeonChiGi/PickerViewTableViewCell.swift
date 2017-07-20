@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol PickerCellDelegate {
+    func changePickerCellData(selectRow:Int)
+}
+
 class PickerViewTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var pickerView: UIPickerView!
     private var list = ["?"]
+    var delegate:PickerCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,4 +52,7 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
         pickerView.reloadAllComponents()
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        delegate?.changePickerCellData(selectRow: row)
+    }
 }

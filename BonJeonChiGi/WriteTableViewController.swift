@@ -13,7 +13,7 @@ class WriteCell: UITableViewCell {
     @IBOutlet var price: UITextField!
 }
 
-class WriteTableViewController: UITableViewController, WriteSectionDelegate, WriteTableViewCellDelegate {
+class WriteTableViewController: UITableViewController, WriteSectionDelegate, WriteTableViewCellDelegate, PickerCellDelegate, DatePickerCellDelegate {
     
     private let log = Logger(logPlace: WriteTableViewController.self)
     private let projectRepository = ProjectRepository.sharedInstance
@@ -181,6 +181,8 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         }
         writeTableViewCell.delegate = self
         writeTableViewCell.selectionStyle = .none
+        writeTableViewCell.name.text = nil
+        writeTableViewCell.value.text = nil
         return writeTableViewCell
     }
     
@@ -188,16 +190,36 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
          if callPickerIndexPath != nil {
             if 1 == callPickerIndexPath?.row && indexPath.row == callPickerIndexPath!.row + 1 {
                 let datePickerCell = Bundle.main.loadNibNamed("DateTableViewCell", owner: self, options: nil)?.first as! DateTableViewCell
+                datePickerCell.delegate = self
                 return datePickerCell
-            } else {
+            }
+            else {
                 let pickerCell = Bundle.main.loadNibNamed("PickerViewTableViewCell", owner: self, options: nil)?.first as! PickerViewTableViewCell
+                pickerCell.delegate = self
                 pickerCell.set(progressKey: getSelectList(indexPath: indexPath))
                 return pickerCell
             }
         }
         let selectSheetCell = Bundle.main.loadNibNamed("SelectSheetCell", owner: self, options: nil)?.first as! SelectSheetCell
         selectSheetCell.selectionStyle = .none
+        changeInfoSelectCell(cell: selectSheetCell, indexPath: indexPath)
         return selectSheetCell
+    }
+    
+    private func changeInfoSelectCell(cell:SelectSheetCell, indexPath:IndexPath) {
+        let names = ProgressNames().get
+        if 1 == indexPath.row {
+            cell.name.text = names[ProgressKey.startDate]
+            cell.value.text = TimeInterval().now().getYYMMDD()
+        }
+        if 2 == indexPath.row {
+            cell.name.text = names[ProgressKey.cycle]
+            cell.value.text = ChoiceList().cycle[0]
+        }
+        if 3 == indexPath.row {
+            cell.name.text = names[ProgressKey.unit]
+            cell.value.text = ChoiceList().unit[0]
+        }
     }
     
     private func getSelectList(indexPath:IndexPath) -> ProgressKey {
@@ -213,8 +235,30 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         return ProgressKey.error
     }
     
+    // date picker
+    func changeDatePickerCell(date: String) {
+        if nil != callPickerIndexPath {
+            let cell = tableView.cellForRow(at: callPickerIndexPath!) as! SelectSheetCell
+            cell.value.text = date
+        }
+    }
+    
+    // data picker
+    func changePickerCellData(selectRow: Int) {
+        if nil != callPickerIndexPath {
+            var info = ""
+            if 2 == callPickerIndexPath?.row {
+                info = ChoiceList().cycle[selectRow]
+            }
+            if 3 == callPickerIndexPath?.row {
+                info = ChoiceList().unit[selectRow]
+            }
+            let cell = tableView.cellForRow(at: callPickerIndexPath!) as! SelectSheetCell
+            cell.value.text = info
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        log.info(message: indexPath)
         self.view.endEditing(true)
         if 0 == indexPath.section && 0 != indexPath.row {
             if callPickerIndexPath != indexPath {
@@ -238,6 +282,9 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
             closeBeforePickerView()
             return;
         }
+        let cell = tableView.cellForRow(at: indexPath) as! SelectSheetCell
+        cell.name.textColor = .red
+        cell.value.textColor = .red
         tableView.beginUpdates()
         self.tableView.insertRows(at: [IndexPath.init(row: indexPath.row + 1, section: indexPath.section)], with: .automatic)
         callPickerIndexPath = IndexPath(row: indexPath.row, section: indexPath.section)
@@ -245,6 +292,10 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     }
     
     func closeBeforePickerView() {
+        let cell = tableView.cellForRow(at: callPickerIndexPath!) as! SelectSheetCell
+        cell.name.textColor = .black
+        cell.value.textColor = .black
+        
         let pickerIndexPath = IndexPath(row: callPickerIndexPath!.row + 1, section: callPickerIndexPath!.section)
         callPickerIndexPath = nil
         tableView.deleteRows(at: [pickerIndexPath], with: .fade)
@@ -254,7 +305,6 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if 0 != indexPath.section {
             log.info(message: "\(indexPath.section) \(indexPath.row)")
-            deleteContentsInCell(indexPath: indexPath)
             if 1 == indexPath.section {
                 spendItemsCount -= 1
             }
@@ -263,12 +313,6 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
             }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-    }
-    
-    func deleteContentsInCell(indexPath:IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! WriteCell
-        cell.name.text = nil
-        cell.price.text = nil
     }
     
     func showAlert(message:String, haveCancel:Bool, doneHandler:((UIAlertAction) -> Swift.Void)?, cancelHandler:((UIAlertAction) -> Swift.Void)?)

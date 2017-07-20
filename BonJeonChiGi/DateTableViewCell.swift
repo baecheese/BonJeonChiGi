@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol DatePickerCellDelegate {
+    func changeDatePickerCell(date:String)
+}
+
 class DateTableViewCell: UITableViewCell, UIPickerViewDelegate {
 
     @IBOutlet weak var datePicker: UIDatePicker!
+    var delegate:DatePickerCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,13 +27,8 @@ class DateTableViewCell: UITableViewCell, UIPickerViewDelegate {
     }
     
     func dateChanged(_ sender:UIDatePicker) {
-        var dateFormatter = DateFormatter()
-        
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
-        print(dateFormatter.string(from: sender.date))
-        
+        delegate?.changeDatePickerCell(date: TimeInterval().getYYMMDD(date: sender.date))
+        print(TimeInterval().getYYMMDD(date: sender.date))
     }
     
     
