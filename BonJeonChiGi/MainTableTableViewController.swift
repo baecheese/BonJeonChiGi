@@ -41,7 +41,7 @@ class MainTableTableViewController: UITableViewController {
         cell.selectionStyle = .none
         cell.projectName.text = project.name
         cell.startDate.text = "시작일 \(project.startDate.getYYMMDD())"
-        cell.achievementRate.text = "달성율 ..."
+        cell.achievementRate.text = "달성율 \(projectRepository.achievementRate(project: project))"
         return cell
     }
     

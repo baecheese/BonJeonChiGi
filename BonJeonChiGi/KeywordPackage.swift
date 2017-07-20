@@ -18,6 +18,7 @@ struct ProgressNames {
         , ProgressKey.unit:"단위"
         , ProgressKey.cycle:"주기"
         , ProgressKey.startDate:"시작 날짜"
+        , ProgressKey.achievementRate:"달성율"
     ]
 }
 
@@ -29,6 +30,7 @@ enum ProgressKey {
     case unit
     case cycle
     case startDate
+    case achievementRate
     case error
 }
 

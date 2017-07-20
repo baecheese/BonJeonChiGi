@@ -18,6 +18,7 @@ class Spend: Object {
 class Mission: Object {
     dynamic var name:String = ""
     dynamic var value:Double = 0.0
+    dynamic var count = 0
     var history = List<MissionHistroy>()
 }
 
@@ -47,6 +48,22 @@ class Project: Object {
     
     func appendMission(mission:Mission) {
         self.missionList.append(mission)
+    }
+    
+    func getSpendTotal() -> Double {
+        var result = 0.0
+        for spend in spendList {
+            result += spend.value
+        }
+        return result
+    }
+    
+    func getmissionTotal() -> Double {
+        var result = 0.0
+        for mission in missionList {
+            result += mission.value * Double(mission.count)
+        }
+        return result
     }
     
 }

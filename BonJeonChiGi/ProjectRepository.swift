@@ -91,7 +91,11 @@ class ProjectRepository: NSObject {
         }
     }
     
+    /* project director */
     
+    func achievementRate(project:Project) -> Double {
+        return project.getmissionTotal() / project.getSpendTotal()
+    }
     
 }
 
