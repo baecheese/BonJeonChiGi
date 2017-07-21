@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5SU-j0-iJV" id="qX1-d8-f3r">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="project name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0B-Pz-q22">
@@ -65,6 +65,7 @@
                                     <outlet property="achievementRate" destination="tB0-GH-fWt" id="Ih6-m6-buc"/>
                                     <outlet property="projectName" destination="R0B-Pz-q22" id="2gS-WB-Md8"/>
                                     <outlet property="startDate" destination="dff-O4-HX6" id="ZYf-UJ-JuI"/>
+                                    <segue destination="ZAA-rr-Szu" kind="show" id="NNA-zP-0hr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -85,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="1591" y="-524"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Read Project View Controller-->
         <scene sceneID="MOG-vO-Txc">
             <objects>
-                <viewController id="ZAA-rr-Szu" customClass="MainViewController" customModule="BonJeonChiGi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZAA-rr-Szu" customClass="ReadProjectViewController" customModule="BonJeonChiGi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m5k-pU-T79"/>
                         <viewControllerLayoutGuide type="bottom" id="oz9-sj-RFw"/>
@@ -105,7 +106,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UNl-ng-V4Z" id="lnV-kH-oep">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -129,16 +130,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wpi-dG-CBS">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gv2-ld-8bt"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Gv2-ld-8bt"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="progressBack" destination="Gz0-s2-mkZ" id="lVv-4q-s6s"/>
-                        <outlet property="tableview" destination="wPI-GB-oXU" id="t0l-Bg-sLT"/>
+                        <outlet property="tableview" destination="wPI-GB-oXU" id="oJb-dL-CPt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQz-SJ-2Z2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1071.2" y="135.38230884557723"/>
+            <point key="canvasLocation" x="636" y="193"/>
         </scene>
         <!--Write Table View Controller-->
         <scene sceneID="yNh-7t-hJh">
@@ -153,7 +153,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qw6-o5-UdG" id="B5w-kS-6kh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -183,7 +183,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ud7-eH-EI2" id="g0n-64-J5a">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2o-o8-R7Q">
@@ -216,24 +216,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoD-lK-Jck" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3374" y="135"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ms1-ws-ZW3">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lfU-JA-Uoy" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pdf-Ti-s2d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ZAA-rr-Szu" kind="relationship" relationship="rootViewController" id="fOj-ME-fA5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ADD-Ei-XMx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="132" y="135.38230884557723"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qy8-vT-II9">
@@ -269,7 +251,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pw3-L4-q6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1024.8" y="-522.18890554722645"/>
+            <point key="canvasLocation" x="570" y="-525"/>
         </scene>
     </scenes>
 </document>
