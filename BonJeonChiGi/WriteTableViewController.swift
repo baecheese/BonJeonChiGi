@@ -17,7 +17,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     private var selectCycle = 0
     private var selectUnit = "₩"
     private var projectNameSectionCount = 4
-    private var spendItemsCount = 1
+    private var goalItemsCount = 1
     private var missionItemsCount = 1
     
     private var pickerView = UIPickerView()
@@ -66,14 +66,14 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         project.cycle = content[ProgressKey.cycle] as! Int
         project.unit = content[ProgressKey.unit] as! String
         
-        let spendList = content[ProgressKey.spendTotal] as! [[String]]
+        let goalList = content[ProgressKey.goalTotal] as! [[String]]
         let missionList = content[ProgressKey.missionTotal] as! [[String]]
         
-        for spendInfo in spendList {
-            let spend = Spend()
-            spend.name = spendInfo[0]
-            spend.value = Double(spendInfo[1])!
-            project.appendSpend(spend: spend)
+        for goalInfo in goalList {
+            let goal = Goal()
+            goal.name = goalInfo[0]
+            goal.value = Double(goalInfo[1])!
+            project.appendGoal(goal: goal)
         }
         
         for missionInfo in missionList {
@@ -89,9 +89,9 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     
     func getContents() -> (Bool, [ProgressKey:Any]?) {
         var result = [ProgressKey:Any]()
-        var spendList = [[String?]]()
+        var goalList = [[String?]]()
         var missionList = [[String?]]()
-        let rowCountList = [projectNameSectionCount, spendItemsCount, missionItemsCount]
+        let rowCountList = [projectNameSectionCount, goalItemsCount, missionItemsCount]
         for section in 0...getWriteKeys().count-1 {
             for row in 0...rowCountList[section]-1 {
                 // project setting
@@ -114,7 +114,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
                     
                     let info = [cell.name.text, cell.value.text]
                     if 1 == section {
-                        spendList.append(info)
+                        goalList.append(info)
                     }
                     if 2 == section {
                         missionList.append(info)
@@ -124,7 +124,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
             result[ProgressKey.startDate] = selectDate
             result[ProgressKey.cycle] = selectCycle
             result[ProgressKey.unit] = selectUnit
-            result[ProgressKey.spendTotal] = spendList
+            result[ProgressKey.goalTotal] = goalList
             result[ProgressKey.missionTotal] = missionList
             
         }
@@ -161,7 +161,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         let keys = ProgressNames().get
         return [
             keys[ProgressKey.projectName]
-            , keys[ProgressKey.spendTotal]
+            , keys[ProgressKey.goalTotal]
             , keys[ProgressKey.missionTotal]
         ]
     }
@@ -170,8 +170,8 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         print("\(section) add cell")
         tableView.beginUpdates()
         if 1 == section {
-            self.tableView.insertRows(at: [IndexPath.init(row: spendItemsCount, section: section)], with: .automatic)
-            spendItemsCount += 1
+            self.tableView.insertRows(at: [IndexPath.init(row: goalItemsCount, section: section)], with: .automatic)
+            goalItemsCount += 1
         }
         if 2 == section {
             self.tableView.insertRows(at: [IndexPath.init(row: missionItemsCount, section: section)], with: .automatic)
@@ -182,7 +182,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if 1 == section {
-            return spendItemsCount
+            return goalItemsCount
         }
         if 2 == section {
             return missionItemsCount
@@ -348,7 +348,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         if 0 != indexPath.section {
             log.info(message: "\(indexPath.section) \(indexPath.row)")
             if 1 == indexPath.section {
-                spendItemsCount -= 1
+                goalItemsCount -= 1
             }
             if 2 == indexPath.section {
                 missionItemsCount -= 1

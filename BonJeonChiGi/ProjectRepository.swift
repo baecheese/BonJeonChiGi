@@ -62,7 +62,7 @@ class ProjectRepository: NSObject {
     }
     
     //
-    func edit(id:Int, name:String, unit:String, cycle:Int, spends:[[String:Double]], missions:[[String:Double]], startDate:Double) -> Bool {
+    func edit(id:Int, name:String, unit:String, cycle:Int, goals:[[String:Double]], missions:[[String:Double]], startDate:Double) -> Bool {
         let project = findOne(id: id)
         do {
             try realm.write {
@@ -94,16 +94,16 @@ class ProjectRepository: NSObject {
     /* project director */
     
     func achievementRate(project:Project) -> Double {
-        return project.getmissionTotal() / project.getSpendTotal()
+        return (project.getSuccessMissionTotal() / project.getGoalTotal()) * 100.0
     }
     
-    func pushMissionHistroy(mission:Mission, history:Histroy) {
+    func pushMissionHistory(mission:Mission, history:History) {
         do {
             try realm.write {
                 if true == history.isSuccess {
                     mission.successCount += 1
                 }
-                mission.appendMissionHistroy(histroy: history)
+                mission.appendMissionHistory(history: history)
             }
         }
         catch {
@@ -111,7 +111,6 @@ class ProjectRepository: NSObject {
         }
         log.info(message: "mission history save : \(history)")
     }
-    
     
 }
 

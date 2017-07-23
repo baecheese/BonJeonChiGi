@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Spend: Object {
+class Goal: Object {
     dynamic var name:String = ""
     dynamic var value:Double = 0.0
     dynamic var hit:Bool = false
@@ -19,15 +19,15 @@ class Mission: Object {
     dynamic var name:String = ""
     dynamic var value:Double = 0.0
     dynamic var successCount = 0
-    private var missionHistroy = List<Histroy>()
+    private var missionHistory = List<History>()
     
-    func appendMissionHistroy(histroy:Histroy) {
-        missionHistroy.append(histroy)
+    func appendMissionHistory(history:History) {
+        missionHistory.append(history)
     }
     
 }
 
-class Histroy: Object {
+class History: Object {
     dynamic var dateList:Double = 0.0//TimeInterval
     dynamic var isSuccess = false
     dynamic var comment:String? = nil
@@ -39,7 +39,7 @@ class Project: Object {
     dynamic var name:String = ""
     dynamic var unit:String = ""
     dynamic var cycle:Int = 0
-    private var spendList = List<Spend>()
+    private var goalList = List<Goal>()
     private var missionList = List<Mission>()
     dynamic var startDate:Double = 0.0
     
@@ -47,8 +47,8 @@ class Project: Object {
         return "id"
     }
     
-    func appendSpend(spend:Spend) {
-        self.spendList.append(spend)
+    func appendGoal(goal:Goal) {
+        self.goalList.append(goal)
     }
     
     func appendMission(mission:Mission) {
@@ -59,15 +59,15 @@ class Project: Object {
         return missionList
     }
     
-    func getSpendTotal() -> Double {
+    func getGoalTotal() -> Double {
         var result = 0.0
-        for spend in spendList {
-            result += spend.value
+        for goal in goalList {
+            result += goal.value
         }
         return result
     }
     
-    func getmissionTotal() -> Double {
+    func getSuccessMissionTotal() -> Double {
         var result = 0.0
         for mission in missionList {
             result += mission.value * Double(mission.successCount)

@@ -155,7 +155,21 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gz0-s2-mkZ">
                                 <rect key="frame" x="0.0" y="20" width="375" height="217"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3k2-74-miD">
+                                        <rect key="frame" x="30" y="30" width="315" height="157"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="3k2-74-miD" secondAttribute="bottom" constant="30" id="O2R-yx-j8T"/>
+                                    <constraint firstItem="3k2-74-miD" firstAttribute="top" secondItem="Gz0-s2-mkZ" secondAttribute="top" constant="30" id="P77-hj-h12"/>
+                                    <constraint firstItem="3k2-74-miD" firstAttribute="leading" secondItem="Gz0-s2-mkZ" secondAttribute="leading" constant="30" id="sxr-Oy-Org"/>
+                                    <constraint firstAttribute="trailing" secondItem="3k2-74-miD" secondAttribute="trailing" constant="30" id="zJg-ea-STg"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -174,6 +188,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Gv2-ld-8bt"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="notice" destination="3k2-74-miD" id="v0u-AD-N5V"/>
                         <outlet property="tableview" destination="wPI-GB-oXU" id="oJb-dL-CPt"/>
                     </connections>
                 </viewController>

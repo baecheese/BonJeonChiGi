@@ -22,6 +22,8 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     var selectProject:Project?
     var missionList:Array<Mission>?
     
+    @IBOutlet weak var notice: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,14 +82,17 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func setProgressGraph() {
-        
+        if let project = selectProject {
+            let names = ProgressNames()
+            notice.text = "\(names.get[ProgressKey.goalTotal]!):\(project.getGoalTotal()) \n\(names.get[ProgressKey.missionSuccessTotal]!):\(project.getSuccessMissionTotal()) \n \(names.get[ProgressKey.achievementRate]!):\(projectRepositroy.achievementRate(project: project))"
+        }
     }
     
-    func pushMissionHistroy(mission:Mission, isSuccess:Bool) {
-        let histroy = Histroy()
-        histroy.dateList = TimeInterval().now()
-        histroy.isSuccess = isSuccess
-        projectRepositroy.pushMissionHistroy(mission: mission, history: histroy)
+    func pushMissionHistory(mission:Mission, isSuccess:Bool) {
+        let history = History()
+        history.dateList = TimeInterval().now()
+        history.isSuccess = isSuccess
+        projectRepositroy.pushMissionHistory(mission: mission, history: history)
         log.info(message: selectProject!)
     }
     
@@ -101,13 +106,13 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
             let yes = UIAlertAction(title: message.yes, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.log.info(message: "push mission yes")
-                self.pushMissionHistroy(mission: mission, isSuccess: true)
+                self.pushMissionHistory(mission: mission, isSuccess: true)
                 self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
             })
             let no = UIAlertAction(title: message.no, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.log.info(message: "push mission no")
-                self.pushMissionHistroy(mission: mission, isSuccess: false)
+                self.pushMissionHistory(mission: mission, isSuccess: false)
                 self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
             })
             let more = UIAlertAction(title: message.more, style: .default, handler: {

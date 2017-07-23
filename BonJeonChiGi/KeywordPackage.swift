@@ -19,25 +19,27 @@ struct ProgressNames {
     // 이후에 gobal 언어 처리 cheeseing
     let get = [
         ProgressKey.projectName:"프로젝트명"
-        , ProgressKey.spendTotal:"총 지출"
-        , ProgressKey.missionTotal:"총 수익"
+        , ProgressKey.goalTotal:"총 목표"
+        , ProgressKey.missionTotal:"총 미션"
         , ProgressKey.remaining: "남은 본전"
         , ProgressKey.unit:"단위"
         , ProgressKey.cycle:"주기"
         , ProgressKey.startDate:"시작 날짜"
         , ProgressKey.achievementRate:"달성율"
+        , ProgressKey.missionSuccessTotal:"성과"
     ]
 }
 
 enum ProgressKey {
     case projectName
-    case spendTotal
+    case goalTotal
     case missionTotal
     case remaining
     case unit
     case cycle
     case startDate
     case achievementRate
+    case missionSuccessTotal
     case error
 }
 

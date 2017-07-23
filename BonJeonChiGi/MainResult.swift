@@ -18,31 +18,30 @@ class MainResult: UIView {
     }
     
     private var billRepository = BillRepository.sharedInstance
-    private var totalSpendMoney = UITextView()
+    private var totalGoalMoney = UITextView()
     
-    func setSpendMoneyTotalLabel(id:Int) {
+    func setGoalMoneyTotalLabel(id:Int) {
         let width = self.frame.width * 0.6
         let hight = self.frame.height * 0.25
         let offsetX = self.frame.width/2 - width/2
         let offsetY = self.frame.height/2 - hight/2
-        totalSpendMoney.frame = CGRect(x: offsetX, y: offsetY, width: width, height: hight)
-        totalSpendMoney.textAlignment = NSTextAlignment.center
-        totalSpendMoney.font = UIFont.boldSystemFont(ofSize: 20.0)
-//        totalSpendMoney.backgroundColor = .blue
+        totalGoalMoney.frame = CGRect(x: offsetX, y: offsetY, width: width, height: hight)
+        totalGoalMoney.textAlignment = NSTextAlignment.center
+        totalGoalMoney.font = UIFont.boldSystemFont(ofSize: 20.0)
         
-        totalSpendMoney.isEditable = false
+        totalGoalMoney.isEditable = false
         changeProgressData(id: id)
-        self.addSubview(totalSpendMoney)
+        self.addSubview(totalGoalMoney)
     }
     
     func changeProgressData(id:Int) {
         let bill = billRepository.findOne(id: id)
         if nil != bill {
             let balanceMoney = billRepository.getBalanceMoney(bill: bill!)
-            totalSpendMoney.text = mainMessage(money: balanceMoney)
+            totalGoalMoney.text = mainMessage(money: balanceMoney)
         }
         else {
-            totalSpendMoney.text = "empty"
+            totalGoalMoney.text = "empty"
         }
     }
     
