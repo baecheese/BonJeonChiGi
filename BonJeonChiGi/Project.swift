@@ -50,6 +50,10 @@ class Project: Object {
         self.missionList.append(mission)
     }
     
+    func getMissionList() -> List<Mission> {
+        return missionList
+    }
+    
     func getSpendTotal() -> Double {
         var result = 0.0
         for spend in spendList {

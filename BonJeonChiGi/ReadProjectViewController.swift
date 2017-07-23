@@ -14,9 +14,12 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     private let log = Logger(logPlace: MainViewController.self)
     private let billRepository = BillRepository.sharedInstance
+    var selectProject:Project?
+    var missionList:Array<Mission>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .black
         tableview.delegate = self
         tableview.dataSource = self
@@ -27,15 +30,23 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
         setProgressGraph()
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let unit = selectProject?.unit {
+            return "mission (\(unit))"
+        }
+        return "mission"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if let missionCount = missionList?.count {
+            return missionCount
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        //        let bill = allBill[indexPath.row]
-        //        cell.textLabel?.text = bill.name
-        //        cell.accessoryType = .detailDisclosureButton
+        cell.textLabel?.text = missionList?[indexPath.row].name
         return cell
     }
     
@@ -46,9 +57,8 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if .delete == editingStyle {
-            //            let bill = billRepository.getAll()[indexPath.row]
-            //            billRepository.delete(bill: bill)
-            //            tableView.reloadData()
+            // mission delete
+            tableView.reloadData()
         }
     }
     

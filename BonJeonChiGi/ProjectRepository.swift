@@ -54,10 +54,10 @@ class ProjectRepository: NSObject {
             return false
         }
         catch {
-            log.error(message: "error")
+            log.error(message: "project save error")
             return false
         }
-        log.info(message: "project : \(project)")
+        log.info(message: "project save success : \(project)")
         return true
     }
     

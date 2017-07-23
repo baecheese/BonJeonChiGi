@@ -51,4 +51,15 @@ class MainTableTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let readPage = storyboard?.instantiateViewController(withIdentifier: "ReadProjectViewController") as! ReadProjectViewController
+        let project = projectAll[indexPath.row]
+        readPage.selectProject = project
+        readPage.missionList = Array(project.getMissionList())
+        self.navigationController?.pushViewController(readPage, animated: true)
+    }
+    
+    
+    
 }
