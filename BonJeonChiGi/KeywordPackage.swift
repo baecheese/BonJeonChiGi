@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct Message {
+    let isMissionCount = "오늘의 미션을 완료하셨습니까?"
+    let yes = "네"
+    let no = "아니오"
+    let more = "더보기"
+}
+
 struct ProgressNames {
     // 이후에 gobal 언어 처리 cheeseing
     let get = [

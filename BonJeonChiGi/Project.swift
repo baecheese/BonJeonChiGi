@@ -18,13 +18,12 @@ class Spend: Object {
 class Mission: Object {
     dynamic var name:String = ""
     dynamic var value:Double = 0.0
-    dynamic var successCount = 0
-    var history = List<MissionHistroy>()
+    var missionHistroy = List<History>()
 }
 
-class MissionHistroy: Object {
+class History: Object {
     dynamic var dateList:Double = 0.0//TimeInterval
-    dynamic var isSuccese:Bool = false
+    dynamic var isSuccess = false
     dynamic var comment:String?
 }
 

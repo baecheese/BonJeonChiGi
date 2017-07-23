@@ -73,21 +73,66 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         log.info(message: "didSelectRowAt : \(indexPath.row)")
-        if let mission = missionList?[indexPath.row] {
-            let cell = tableView.cellForRow(at: indexPath)
-            UIView.animate(withDuration: 1.0, animations: {
-                cell?.backgroundColor = .red
-                self.pushMissionCount(mission: mission)
-            }, completion: nil)
-        }
+        
+        let cell = tableView.cellForRow(at: indexPath) as! ReadPageMissionCell
+        missionCellSelectAnimation(cell: cell, select: true, completion: nil)
+        self.showActionSheet(indexPath: indexPath)
     }
     
     func setProgressGraph() {
         
     }
     
-    func pushMissionCount(mission:Mission) {
+    func pushMissionCount(cell:ReadPageMissionCell, mission:Mission) {
         
+        self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
+    }
+    
+    func showActionSheet(indexPath:IndexPath) {
+        if let mission = missionList?[indexPath.row] {
+            
+            log.info(message: "push mission \(mission.name)")
+            let message = Message()
+            let cell = self.tableview.cellForRow(at: indexPath) as! ReadPageMissionCell
+            let optionMenu = UIAlertController(title: nil, message: message.isMissionCount, preferredStyle: .actionSheet)
+            let yes = UIAlertAction(title: message.yes, style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.log.info(message: "push mission yes")
+                self.pushMissionCount(cell: cell, mission: mission)
+            })
+            let no = UIAlertAction(title: message.no, style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.pushMissionCount(cell: cell, mission: mission)
+                self.log.info(message: "push mission no")
+            })
+            let more = UIAlertAction(title: message.more, style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.log.info(message: "push mission more")
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
+            })
+            
+            optionMenu.addAction(yes)
+            optionMenu.addAction(no)
+            optionMenu.addAction(more)
+            optionMenu.addAction(cancel)
+            
+            self.present(optionMenu, animated: true, completion: nil)
+        }
+    }
+    
+    func missionCellSelectAnimation(cell:ReadPageMissionCell, select:Bool, completion: ((Bool) -> Void)?) {
+        UIView.animate(withDuration: 0.3, animations: {
+            if true == select {
+                cell.backgroundColor = .red
+            }
+            else {
+                cell.backgroundColor = .white
+            }
+        }, completion: completion)
     }
     
     override func didReceiveMemoryWarning() {

@@ -97,6 +97,10 @@ class ProjectRepository: NSObject {
         return project.getmissionTotal() / project.getSpendTotal()
     }
     
+    func pushMissionHistroy(mission:Mission) {
+        
+    }
+    
 }
 
 enum ContentsSaveError : Error {
