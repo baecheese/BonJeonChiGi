@@ -34,7 +34,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     override func viewDidLayoutSubviews() {
-        setProgressGraph()
+        setProgressNotice()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -81,7 +81,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
         self.showActionSheet(indexPath: indexPath)
     }
     
-    func setProgressGraph() {
+    func setProgressNotice() {
         if let project = selectProject {
             let names = ProgressNames()
             notice.text = "\(names.get[ProgressKey.goalTotal]!):\(project.getGoalTotal()) \n\(names.get[ProgressKey.missionSuccessTotal]!):\(project.getSuccessMissionTotal()) \n \(names.get[ProgressKey.achievementRate]!):\(projectRepositroy.achievementRate(project: project))"
@@ -107,6 +107,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
                 (alert: UIAlertAction!) -> Void in
                 self.log.info(message: "push mission yes")
                 self.pushMissionHistory(mission: mission, isSuccess: true)
+                self.setProgressNotice()
                 self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
             })
             let no = UIAlertAction(title: message.no, style: .default, handler: {
