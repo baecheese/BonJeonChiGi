@@ -18,13 +18,19 @@ class Spend: Object {
 class Mission: Object {
     dynamic var name:String = ""
     dynamic var value:Double = 0.0
-    var missionHistroy = List<History>()
+    dynamic var successCount = 0
+    private var missionHistroy = List<Histroy>()
+    
+    func appendMissionHistroy(histroy:Histroy) {
+        missionHistroy.append(histroy)
+    }
+    
 }
 
-class History: Object {
+class Histroy: Object {
     dynamic var dateList:Double = 0.0//TimeInterval
     dynamic var isSuccess = false
-    dynamic var comment:String?
+    dynamic var comment:String? = nil
 }
 
 class Project: Object {

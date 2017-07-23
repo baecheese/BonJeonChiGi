@@ -97,9 +97,21 @@ class ProjectRepository: NSObject {
         return project.getmissionTotal() / project.getSpendTotal()
     }
     
-    func pushMissionHistroy(mission:Mission) {
-        
+    func pushMissionHistroy(mission:Mission, history:Histroy) {
+        do {
+            try realm.write {
+                if true == history.isSuccess {
+                    mission.successCount += 1
+                }
+                mission.appendMissionHistroy(histroy: history)
+            }
+        }
+        catch {
+            log.error(message: "project save error")
+        }
+        log.info(message: "mission history save : \(history)")
     }
+    
     
 }
 

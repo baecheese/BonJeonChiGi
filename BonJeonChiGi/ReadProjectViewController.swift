@@ -18,7 +18,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet var tableview: UITableView!
     
     private let log = Logger(logPlace: MainViewController.self)
-    private let billRepository = BillRepository.sharedInstance
+    private let projectRepositroy = ProjectRepository.sharedInstance
     var selectProject:Project?
     var missionList:Array<Mission>?
     
@@ -83,9 +83,12 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-    func pushMissionCount(cell:ReadPageMissionCell, mission:Mission) {
-        
-        self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
+    func pushMissionHistroy(mission:Mission, isSuccess:Bool) {
+        let histroy = Histroy()
+        histroy.dateList = TimeInterval().now()
+        histroy.isSuccess = isSuccess
+        projectRepositroy.pushMissionHistroy(mission: mission, history: histroy)
+        log.info(message: selectProject!)
     }
     
     func showActionSheet(indexPath:IndexPath) {
@@ -98,16 +101,19 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
             let yes = UIAlertAction(title: message.yes, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.log.info(message: "push mission yes")
-                self.pushMissionCount(cell: cell, mission: mission)
+                self.pushMissionHistroy(mission: mission, isSuccess: true)
+                self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
             })
             let no = UIAlertAction(title: message.no, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-                self.pushMissionCount(cell: cell, mission: mission)
                 self.log.info(message: "push mission no")
+                self.pushMissionHistroy(mission: mission, isSuccess: false)
+                self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
             })
             let more = UIAlertAction(title: message.more, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 self.log.info(message: "push mission more")
+                self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
             })
             
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {
