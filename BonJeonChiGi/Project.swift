@@ -24,7 +24,7 @@ class Mission: Object {
 
 class MissionHistroy: Object {
     dynamic var dateList:Double = 0.0//TimeInterval
-    dynamic var isSucceseList:Bool = false
+    dynamic var isSuccese:Bool = false
     dynamic var comment:String?
 }
 

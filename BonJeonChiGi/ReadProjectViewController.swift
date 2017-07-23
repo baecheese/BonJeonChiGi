@@ -8,6 +8,11 @@
 
 import UIKit
 
+class ReadPageMissionCell: UITableViewCell {
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var value: UILabel!
+}
+
 class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableview: UITableView!
@@ -45,8 +50,12 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        cell.textLabel?.text = missionList?[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReadPageMissionCell") as! ReadPageMissionCell
+        cell.selectionStyle = .none
+        if let mission = missionList?[indexPath.row] {
+            cell.name.text = mission.name
+            cell.value.text = String(mission.value)
+        }
         return cell
     }
     
@@ -62,7 +71,22 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        log.info(message: "didSelectRowAt : \(indexPath.row)")
+        if let mission = missionList?[indexPath.row] {
+            let cell = tableView.cellForRow(at: indexPath)
+            UIView.animate(withDuration: 1.0, animations: {
+                cell?.backgroundColor = .red
+                self.pushMissionCount(mission: mission)
+            }, completion: nil)
+        }
+    }
+    
     func setProgressGraph() {
+        
+    }
+    
+    func pushMissionCount(mission:Mission) {
         
     }
     
