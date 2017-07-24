@@ -13,6 +13,7 @@ struct Message {
     let yes = "네"
     let no = "아니오"
     let more = "더보기"
+    let haveNotCycle = "알 수 없음"
 }
 
 struct ProgressNames {
@@ -27,6 +28,8 @@ struct ProgressNames {
         , ProgressKey.startDate:"시작 날짜"
         , ProgressKey.achievementRate:"달성율"
         , ProgressKey.missionSuccessTotal:"성과"
+        , ProgressKey.expectedBonJeonDay:"예상 완료 일"
+        
     ]
 }
 
@@ -40,6 +43,7 @@ enum ProgressKey {
     case startDate
     case achievementRate
     case missionSuccessTotal
+    case expectedBonJeonDay
     case error
 }
 

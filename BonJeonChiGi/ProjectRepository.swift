@@ -94,7 +94,13 @@ class ProjectRepository: NSObject {
     /* project director */
     
     func achievementRate(project:Project) -> Double {
-        return (project.getSuccessMissionTotal() / project.getGoalTotal()) * 100.0
+        var achievementRate = (project.getSuccessMissionTotal() / project.getGoalTotal()) * 100.0
+        return achievementRate.roundToPlaces(places: 2)
+    }
+    
+    func expectHitBonJeonDay(project:Project) -> TimeInterval {
+        let day = Int(round(project.getRemainGoal() / project.getMissionTotal()) * Double(project.cycle))
+        return TimeInterval(project.startDate).plusDay(dayAmount: day)
     }
     
     func pushMissionHistory(mission:Mission, history:History) {
@@ -112,6 +118,14 @@ class ProjectRepository: NSObject {
         log.info(message: "mission history save : \(history)")
     }
     
+}
+
+extension Double {
+    /// Rounds the double to decimal places value
+    mutating func roundToPlaces(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return Darwin.round(self * divisor) / divisor
+    }
 }
 
 enum ContentsSaveError : Error {

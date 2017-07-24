@@ -84,8 +84,16 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     func setProgressNotice() {
         if let project = selectProject {
             let names = ProgressNames()
-            notice.text = "\(names.get[ProgressKey.goalTotal]!):\(project.getGoalTotal()) \n\(names.get[ProgressKey.missionSuccessTotal]!):\(project.getSuccessMissionTotal()) \n \(names.get[ProgressKey.achievementRate]!):\(projectRepositroy.achievementRate(project: project))"
+            log.info(message: project.startDate.getYYMMDD())
+            notice.text = "\(names.get[ProgressKey.expectedBonJeonDay]!):\(getExpectHitBonJeonDay(project: project)) \n\(names.get[ProgressKey.goalTotal]!):\(project.getGoalTotal()) \n\(names.get[ProgressKey.missionSuccessTotal]!):\(project.getSuccessMissionTotal()) \n \(names.get[ProgressKey.achievementRate]!):\(projectRepositroy.achievementRate(project: project))%"
         }
+    }
+    
+    private func getExpectHitBonJeonDay(project:Project) -> String {
+        if 0 == projectRepositroy.expectHitBonJeonDay(project: project) {
+            return Message().haveNotCycle
+        }
+        return projectRepositroy.expectHitBonJeonDay(project: project).getYYMMDD()
     }
     
     func pushMissionHistory(mission:Mission, isSuccess:Bool) {
