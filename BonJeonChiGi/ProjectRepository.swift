@@ -37,7 +37,7 @@ class ProjectRepository: NSObject {
         var latestId = 0
         do {
             try realm.write {
-                if false == (realm.objects(Project.self).isEmpty) {
+                if (false == realm.objects(Project.self).isEmpty) {
                     latestId = (realm.objects(Project.self).max(ofProperty: "id") as Int?)!
                     latestId += 1
                     project.id = latestId
