@@ -42,6 +42,8 @@ class Project: Object {
     private var goalList = List<Goal>()
     private var missionList = List<Mission>()
     dynamic var startDate:Double = 0.0
+    dynamic var hitDate:Double = 0.0
+    dynamic var hitAllGoal = false
     
     override class func primaryKey() -> String? {
         return "id"
@@ -67,12 +69,24 @@ class Project: Object {
         return result
     }
     
+    func getMissionTotal() -> Double {
+        var result = 0.0
+        for mission in missionList {
+            result += mission.value
+        }
+        return result
+    }
+    
     func getSuccessMissionTotal() -> Double {
         var result = 0.0
         for mission in missionList {
             result += mission.value * Double(mission.successCount)
         }
         return result
+    }
+    
+    func getRemainGoal() -> Double {
+        return getGoalTotal() - getSuccessMissionTotal()
     }
     
 }
