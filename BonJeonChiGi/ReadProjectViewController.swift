@@ -17,7 +17,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet var tableview: UITableView!
     
-    private let log = Logger(logPlace: MainViewController.self)
+    private let log = Logger(logPlace: ReadProjectViewController.self)
     private let projectRepositroy = ProjectRepository.sharedInstance
     var selectProject:Project?
     var missionList:Array<Mission>?
@@ -66,11 +66,16 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if .delete == editingStyle {
-            // mission delete
-            tableView.reloadData()
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (rowAction, indexPath) in
+            let missionHistroyTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "MissionHistoryTableViewController") as! MissionHistoryTableViewController
+            if let mission = self.missionList?[indexPath.row] {
+                missionHistroyTableViewController.missionHistorys = Array(mission.getMissionHistory())
+            }
+            self.navigationController?.pushViewController(missionHistroyTableViewController, animated: true)
         }
+        editAction.backgroundColor = .blue
+        return [editAction]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -102,6 +107,9 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
         history.isSuccess = isSuccess
         projectRepositroy.pushMissionHistory(mission: mission, history: history)
         log.info(message: selectProject!)
+        
+        let main = self.navigationController?.viewControllers.first as! MainTableTableViewController
+        main.tableView.reloadData()
     }
     
     func showActionSheet(indexPath:IndexPath) {

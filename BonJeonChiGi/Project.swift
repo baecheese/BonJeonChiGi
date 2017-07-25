@@ -25,6 +25,10 @@ class Mission: Object {
         missionHistory.append(history)
     }
     
+    func getMissionHistory() -> List<History> {
+        return missionHistory
+    }
+    
 }
 
 class History: Object {
