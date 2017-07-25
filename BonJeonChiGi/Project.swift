@@ -19,20 +19,21 @@ class Mission: Object {
     dynamic var name:String = ""
     dynamic var value:Double = 0.0
     dynamic var successCount = 0
-    private var missionHistory = List<History>()
+    private var missionHistories = List<History>()
     
     func appendMissionHistory(history:History) {
-        missionHistory.append(history)
+        //List<History>(missionHistory.sorted(byKeyPath: "date"))
+        missionHistories.append(history)
     }
     
-    func getMissionHistory() -> List<History> {
-        return missionHistory
+    func getMissionHistories() -> List<History> {
+        return missionHistories
     }
     
 }
 
 class History: Object {
-    dynamic var dateList:Double = 0.0//TimeInterval
+    dynamic var date:Double = 0.0//TimeInterval
     dynamic var isSuccess = false
     dynamic var comment:String? = nil
 }

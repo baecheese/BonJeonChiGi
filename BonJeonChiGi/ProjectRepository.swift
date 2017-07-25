@@ -91,6 +91,10 @@ class ProjectRepository: NSObject {
         }
     }
     
+    func deleteHistory(mission:Mission, index:Int) {
+        mission.getMissionHistories().remove(objectAtIndex: index)
+    }
+    
     /* project director */
     
     func achievementRate(project:Project) -> Double {
@@ -121,7 +125,6 @@ class ProjectRepository: NSObject {
 }
 
 extension Double {
-    /// Rounds the double to decimal places value
     mutating func roundToPlaces(places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return Darwin.round(self * divisor) / divisor
