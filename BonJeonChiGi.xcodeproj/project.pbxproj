@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030D4CFD1F31C6D200C24775 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D4CFC1F31C6D200C24775 /* ColorManager.swift */; };
 		03177ABD1F04C9BB00886C29 /* WriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177ABC1F04C9BB00886C29 /* WriteTableViewController.swift */; };
 		03177ABF1F0606F100886C29 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177ABE1F0606F100886C29 /* Logger.swift */; };
 		03177AC11F060E1500886C29 /* WriteSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177AC01F060E1500886C29 /* WriteSection.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030D4CFC1F31C6D200C24775 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		03177ABC1F04C9BB00886C29 /* WriteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTableViewController.swift; sourceTree = "<group>"; };
 		03177ABE1F0606F100886C29 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		03177AC01F060E1500886C29 /* WriteSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteSection.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				03177ABE1F0606F100886C29 /* Logger.swift */,
 				032809E41F18B2AB00958614 /* KeywordPackage.swift */,
 				037453F21F204AB200FD698F /* TimeExtenstion.swift */,
+				030D4CFC1F31C6D200C24775 /* ColorManager.swift */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				034CD7881F2749CE00AF33A2 /* MissionHistoryTableViewController.swift in Sources */,
 				03E7C5951F1F26F400B60525 /* PickerViewTableViewCell.swift in Sources */,
 				037453F31F204AB200FD698F /* TimeExtenstion.swift in Sources */,
+				030D4CFD1F31C6D200C24775 /* ColorManager.swift in Sources */,
 				03E7C59F1F1F537300B60525 /* DateTableViewCell.swift in Sources */,
 				03177ABD1F04C9BB00886C29 /* WriteTableViewController.swift in Sources */,
 				0388825E1F176EFF00334E63 /* MainTableTableViewController.swift in Sources */,

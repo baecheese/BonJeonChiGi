@@ -20,6 +20,7 @@ class MainTableTableViewController: UITableViewController {
     let log = Logger(logPlace: MainTableTableViewController.self)
     let projectRepository = ProjectRepository.sharedInstance
     let projectAll = ProjectRepository.sharedInstance.findAll()
+    let colorManager = ColorManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,18 +47,8 @@ class MainTableTableViewController: UITableViewController {
         cell.startDate.text = "시작일 \(project.startDate.getYYMMDD())"
         let achievementRate = projectRepository.achievementRate(project: project)
         cell.achievementRate.text = "달성율 \(achievementRate)"
-        cell.achievementRateColor.backgroundColor = getAchievementRateColor(achievementRate: achievementRate)
+        cell.achievementRateColor.backgroundColor = colorManager.getAchievementRateColor(achievementRate: achievementRate)
         return cell
-    }
-    
-    func getAchievementRateColor(achievementRate:Double) -> UIColor {
-        if 100.0 <= achievementRate {
-            return .blue
-        }
-        else if 90.0 <= achievementRate {
-            return .red
-        }
-        return .yellow
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
