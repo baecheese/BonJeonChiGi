@@ -9,6 +9,7 @@
 import UIKit
 
 class MainCell: UITableViewCell {
+    @IBOutlet weak var achievementRateColor: UIView!
     @IBOutlet weak var projectName: UILabel!
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var achievementRate: UILabel!
@@ -33,6 +34,9 @@ class MainTableTableViewController: UITableViewController {
         return projectAll.count
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainCell
@@ -40,8 +44,20 @@ class MainTableTableViewController: UITableViewController {
         cell.selectionStyle = .none
         cell.projectName.text = project.name
         cell.startDate.text = "시작일 \(project.startDate.getYYMMDD())"
-        cell.achievementRate.text = "달성율 \(projectRepository.achievementRate(project: project))"
+        let achievementRate = projectRepository.achievementRate(project: project)
+        cell.achievementRate.text = "달성율 \(achievementRate)"
+        cell.achievementRateColor.backgroundColor = getAchievementRateColor(achievementRate: achievementRate)
         return cell
+    }
+    
+    func getAchievementRateColor(achievementRate:Double) -> UIColor {
+        if 100.0 <= achievementRate {
+            return .blue
+        }
+        else if 90.0 <= achievementRate {
+            return .red
+        }
+        return .yellow
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -52,13 +68,24 @@ class MainTableTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let readPage = storyboard?.instantiateViewController(withIdentifier: "ReadProjectViewController") as! ReadProjectViewController
-        let project = projectAll[indexPath.row]
+        showClickMainCellAnimation(indexPath: indexPath) { (Bool) in
+            self.moveReadPage(indexPath: indexPath)
+        }
+    }
+    
+    func showClickMainCellAnimation(indexPath:IndexPath, completion:((Bool) -> Void)?) {
+        UIView.animate(withDuration: 0.75, animations: { () -> Void in UIView.setAnimationCurve(UIViewAnimationCurve.easeInOut)
+                let cell = self.tableView.cellForRow(at: indexPath) as! MainCell
+                UIView.setAnimationTransition(UIViewAnimationTransition.flipFromLeft, for: cell.achievementRateColor, cache: false)
+        }, completion: completion)
+    }
+    
+    func moveReadPage(indexPath:IndexPath) {
+        let readPage = self.storyboard?.instantiateViewController(withIdentifier: "ReadProjectViewController") as! ReadProjectViewController
+        let project = self.projectAll[indexPath.row]
         readPage.selectProject = project
         readPage.missionList = Array(project.getMissionList())
         self.navigationController?.pushViewController(readPage, animated: true)
     }
-    
-    
     
 }
