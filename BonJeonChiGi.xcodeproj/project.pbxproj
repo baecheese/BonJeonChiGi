@@ -11,13 +11,10 @@
 		03177ABF1F0606F100886C29 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177ABE1F0606F100886C29 /* Logger.swift */; };
 		03177AC11F060E1500886C29 /* WriteSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177AC01F060E1500886C29 /* WriteSection.swift */; };
 		032809E51F18B2AB00958614 /* KeywordPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032809E41F18B2AB00958614 /* KeywordPackage.swift */; };
-		032809E91F18E5C800958614 /* TestSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032809E81F18E5C800958614 /* TestSave.swift */; };
 		032809F21F1DEE0300958614 /* SelectSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032809F01F1DEE0300958614 /* SelectSheetCell.swift */; };
 		032809F31F1DEE0300958614 /* SelectSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032809F11F1DEE0300958614 /* SelectSheetCell.xib */; };
 		032809F81F1DF07D00958614 /* WriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032809F61F1DF07D00958614 /* WriteTableViewCell.swift */; };
 		032809F91F1DF07D00958614 /* WriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032809F71F1DF07D00958614 /* WriteTableViewCell.xib */; };
-		034A89A21F02026600BAD4CB /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A89A11F02026600BAD4CB /* Bill.swift */; };
-		034A89A81F0203F200BAD4CB /* BillRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034A89A71F0203F200BAD4CB /* BillRepository.swift */; };
 		034CD7841F223D3C00AF33A2 /* ReadProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CD7831F223D3C00AF33A2 /* ReadProjectViewController.swift */; };
 		034CD7881F2749CE00AF33A2 /* MissionHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CD7871F2749CE00AF33A2 /* MissionHistoryTableViewController.swift */; };
 		037453F31F204AB200FD698F /* TimeExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037453F21F204AB200FD698F /* TimeExtenstion.swift */; };
@@ -28,7 +25,6 @@
 		0388825A1F17644D00334E63 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038882591F17644D00334E63 /* Project.swift */; };
 		0388825C1F176B4500334E63 /* ProjectRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0388825B1F176B4500334E63 /* ProjectRepository.swift */; };
 		0388825E1F176EFF00334E63 /* MainTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0388825D1F176EFF00334E63 /* MainTableTableViewController.swift */; };
-		039E727D1F0106E700DBD0AE /* MainResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039E727C1F0106E700DBD0AE /* MainResult.swift */; };
 		039E72831F011D4C00DBD0AE /* SharedMemoryContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039E72821F011D4C00DBD0AE /* SharedMemoryContext.swift */; };
 		03E7C5951F1F26F400B60525 /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E7C5931F1F26F400B60525 /* PickerViewTableViewCell.swift */; };
 		03E7C5961F1F26F400B60525 /* PickerViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E7C5941F1F26F400B60525 /* PickerViewTableViewCell.xib */; };
@@ -42,13 +38,10 @@
 		03177ABE1F0606F100886C29 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		03177AC01F060E1500886C29 /* WriteSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteSection.swift; sourceTree = "<group>"; };
 		032809E41F18B2AB00958614 /* KeywordPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordPackage.swift; sourceTree = "<group>"; };
-		032809E81F18E5C800958614 /* TestSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSave.swift; sourceTree = "<group>"; };
 		032809F01F1DEE0300958614 /* SelectSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSheetCell.swift; sourceTree = "<group>"; };
 		032809F11F1DEE0300958614 /* SelectSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectSheetCell.xib; sourceTree = "<group>"; };
 		032809F61F1DF07D00958614 /* WriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTableViewCell.swift; sourceTree = "<group>"; };
 		032809F71F1DF07D00958614 /* WriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WriteTableViewCell.xib; sourceTree = "<group>"; };
-		034A89A11F02026600BAD4CB /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
-		034A89A71F0203F200BAD4CB /* BillRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillRepository.swift; sourceTree = "<group>"; };
 		034CD7831F223D3C00AF33A2 /* ReadProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadProjectViewController.swift; sourceTree = "<group>"; };
 		034CD7871F2749CE00AF33A2 /* MissionHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionHistoryTableViewController.swift; sourceTree = "<group>"; };
 		037453F21F204AB200FD698F /* TimeExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeExtenstion.swift; sourceTree = "<group>"; };
@@ -61,7 +54,6 @@
 		038882591F17644D00334E63 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		0388825B1F176B4500334E63 /* ProjectRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRepository.swift; sourceTree = "<group>"; };
 		0388825D1F176EFF00334E63 /* MainTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableTableViewController.swift; sourceTree = "<group>"; };
-		039E727C1F0106E700DBD0AE /* MainResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainResult.swift; sourceTree = "<group>"; };
 		039E72821F011D4C00DBD0AE /* SharedMemoryContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedMemoryContext.swift; sourceTree = "<group>"; };
 		03E7C5931F1F26F400B60525 /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		03E7C5941F1F26F400B60525 /* PickerViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewTableViewCell.xib; sourceTree = "<group>"; };
@@ -89,9 +81,6 @@
 			children = (
 				038882591F17644D00334E63 /* Project.swift */,
 				0388825B1F176B4500334E63 /* ProjectRepository.swift */,
-				034A89A11F02026600BAD4CB /* Bill.swift */,
-				034A89A71F0203F200BAD4CB /* BillRepository.swift */,
-				032809E81F18E5C800958614 /* TestSave.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -100,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				03177AC01F060E1500886C29 /* WriteSection.swift */,
-				039E727C1F0106E700DBD0AE /* MainResult.swift */,
 				03E7C58E1F1F17B100B60525 /* Custom Cell */,
 			);
 			name = View;
@@ -330,18 +318,14 @@
 				034CD7881F2749CE00AF33A2 /* MissionHistoryTableViewController.swift in Sources */,
 				03E7C5951F1F26F400B60525 /* PickerViewTableViewCell.swift in Sources */,
 				037453F31F204AB200FD698F /* TimeExtenstion.swift in Sources */,
-				032809E91F18E5C800958614 /* TestSave.swift in Sources */,
 				03E7C59F1F1F537300B60525 /* DateTableViewCell.swift in Sources */,
 				03177ABD1F04C9BB00886C29 /* WriteTableViewController.swift in Sources */,
 				0388825E1F176EFF00334E63 /* MainTableTableViewController.swift in Sources */,
 				034CD7841F223D3C00AF33A2 /* ReadProjectViewController.swift in Sources */,
 				032809F21F1DEE0300958614 /* SelectSheetCell.swift in Sources */,
 				03177ABF1F0606F100886C29 /* Logger.swift in Sources */,
-				034A89A21F02026600BAD4CB /* Bill.swift in Sources */,
 				0388825A1F17644D00334E63 /* Project.swift in Sources */,
 				0388825C1F176B4500334E63 /* ProjectRepository.swift in Sources */,
-				039E727D1F0106E700DBD0AE /* MainResult.swift in Sources */,
-				034A89A81F0203F200BAD4CB /* BillRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -107,11 +107,11 @@ class ProjectRepository: NSObject {
         return TimeInterval(project.startDate).plusDay(dayAmount: day)
     }
     
-    func pushMissionHistory(mission:Mission, history:History) {
+    func addMissionHistory(mission:Mission, history:History) {
         do {
             try realm.write {
-                if true == history.isSuccess {
-                    mission.successCount += 1
+                if 0 < history.successCount {
+                    mission.successCount += history.successCount
                 }
                 mission.appendMissionHistory(history: history)
             }

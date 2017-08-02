@@ -67,7 +67,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (rowAction, indexPath) in
+        let editAction = UITableViewRowAction(style: .normal, title: "history") { (rowAction, indexPath) in
             let missionHistroyTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "MissionHistoryTableViewController") as! MissionHistoryTableViewController
             if let mission = self.missionList?[indexPath.row] {
                 missionHistroyTableViewController.mission = mission
@@ -105,8 +105,10 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     func pushMissionHistory(mission:Mission, isSuccess:Bool) {
         let history = History()
         history.date = TimeInterval().now()
-        history.isSuccess = isSuccess
-        projectRepositroy.pushMissionHistory(mission: mission, history: history)
+        if true == isSuccess {
+            history.successCount += 1
+        }
+        projectRepositroy.addMissionHistory(mission: mission, history: history)
         log.info(message: selectProject!)
         
         let main = self.navigationController?.viewControllers.first as! MainTableTableViewController

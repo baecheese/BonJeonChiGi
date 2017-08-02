@@ -14,6 +14,7 @@ struct Message {
     let no = "아니오"
     let more = "더보기"
     let haveNotCycle = "알 수 없음"
+    let noComment = "No Comment"
 }
 
 struct ProgressNames {
