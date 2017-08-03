@@ -17,8 +17,8 @@ class MissionHistoryCell: UITableViewCell {
 
 class MissionHistoryTableViewController: UITableViewController {
 
-    let log = Logger(logPlace: MissionHistoryTableViewController.self)
-    
+    private let log = Logger(logPlace: MissionHistoryTableViewController.self)
+    private let colorManager = ColorManager.sharedInstance
     var mission:Mission? = nil
     var missionHistories:[History]? = nil
     
@@ -54,19 +54,12 @@ class MissionHistoryTableViewController: UITableViewController {
         cell.selectionStyle = .none
         if let history = missionHistories?[indexPath.row] {
             cell.date.text = "\(TimeInterval(history.date).getAllTimeInfo())"
-            cell.isSuccess.backgroundColor = getMissionClearColor(history: history)
+            cell.isSuccess.backgroundColor = colorManager.getMissionClearColor(history: history)
             cell.comment.text = getHistroyComment(history: history)
             cell.successValue.text = String((mission?.value)! * Double(history.successCount))
         }
         
         return cell
-    }
-    
-    private func getMissionClearColor(history:History) -> UIColor {
-        if 0 < history.successCount {
-            return .blue
-        }
-        return .red
     }
     
     private func getHistroyComment(history:History) -> String {

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		030D4CFD1F31C6D200C24775 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D4CFC1F31C6D200C24775 /* ColorManager.swift */; };
+		030D4D001F3311D600C24775 /* 서울한강 장체M.otf in Resources */ = {isa = PBXBuildFile; fileRef = 030D4CFF1F3311D500C24775 /* 서울한강 장체M.otf */; };
+		030D4D061F33132800C24775 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D4D051F33132800C24775 /* FontManager.swift */; };
 		03177ABD1F04C9BB00886C29 /* WriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177ABC1F04C9BB00886C29 /* WriteTableViewController.swift */; };
 		03177ABF1F0606F100886C29 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177ABE1F0606F100886C29 /* Logger.swift */; };
 		03177AC11F060E1500886C29 /* WriteSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03177AC01F060E1500886C29 /* WriteSection.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		030D4CFC1F31C6D200C24775 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		030D4CFF1F3311D500C24775 /* 서울한강 장체M.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "서울한강 장체M.otf"; sourceTree = "<group>"; };
+		030D4D051F33132800C24775 /* FontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		03177ABC1F04C9BB00886C29 /* WriteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTableViewController.swift; sourceTree = "<group>"; };
 		03177ABE1F0606F100886C29 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		03177AC01F060E1500886C29 /* WriteSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteSection.swift; sourceTree = "<group>"; };
@@ -78,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		030D4CFE1F3311B800C24775 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				030D4CFF1F3311D500C24775 /* 서울한강 장체M.otf */,
+			);
+			name = resource;
+			sourceTree = "<group>";
+		};
 		034A89A31F0203A100BAD4CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +127,7 @@
 				03177ABE1F0606F100886C29 /* Logger.swift */,
 				032809E41F18B2AB00958614 /* KeywordPackage.swift */,
 				037453F21F204AB200FD698F /* TimeExtenstion.swift */,
+				030D4D051F33132800C24775 /* FontManager.swift */,
 				030D4CFC1F31C6D200C24775 /* ColorManager.swift */,
 			);
 			name = Support;
@@ -141,6 +154,7 @@
 		037C815C1ECFE25400D37ACD /* BonJeonChiGi */ = {
 			isa = PBXGroup;
 			children = (
+				030D4CFE1F3311B800C24775 /* resource */,
 				034A89A61F0203C200BAD4CB /* Support */,
 				034A89A51F0203B000BAD4CB /* Controller */,
 				034A89A41F0203AA00BAD4CB /* View */,
@@ -248,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				030D4D001F3311D600C24775 /* 서울한강 장체M.otf in Resources */,
 				037C81681ECFE25400D37ACD /* LaunchScreen.storyboard in Resources */,
 				03E7C5A01F1F537300B60525 /* DateTableViewCell.xib in Resources */,
 				032809F31F1DEE0300958614 /* SelectSheetCell.xib in Resources */,
@@ -317,6 +332,7 @@
 				032809F81F1DF07D00958614 /* WriteTableViewCell.swift in Sources */,
 				039E72831F011D4C00DBD0AE /* SharedMemoryContext.swift in Sources */,
 				032809E51F18B2AB00958614 /* KeywordPackage.swift in Sources */,
+				030D4D061F33132800C24775 /* FontManager.swift in Sources */,
 				03177AC11F060E1500886C29 /* WriteSection.swift in Sources */,
 				034CD7881F2749CE00AF33A2 /* MissionHistoryTableViewController.swift in Sources */,
 				03E7C5951F1F26F400B60525 /* PickerViewTableViewCell.swift in Sources */,

@@ -29,9 +29,15 @@ extension UIColor {
 
 class ColorManager: NSObject {
     
-    override init() {
+    static let sharedInstance:ColorManager = ColorManager()
+    
+    private override init() {
         super.init()
     }
+    
+    let historyAction = UIColor(rgb: 0x1695A3)
+    let writeSection = UIColor(rgb: 0xACF0F2)
+    let cellAddButton = UIColor(rgb: 0x1695A3)
     
     func getAchievementRateColor(achievementRate:Double) -> UIColor {
         if 100.0 <= achievementRate {
@@ -44,6 +50,19 @@ class ColorManager: NSObject {
     }
     
     
+    func getMissionClearColor(history:History) -> UIColor {
+        if 0 < history.successCount {
+            return .blue
+        }
+        return .red
+    }
+    
+    func missionCellColor(isSelect:Bool) -> UIColor {
+        if true == isSelect {
+            return .red
+        }
+        return .white
+    }
     
     
 }

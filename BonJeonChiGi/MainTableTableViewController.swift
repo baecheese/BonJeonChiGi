@@ -20,7 +20,8 @@ class MainTableTableViewController: UITableViewController {
     let log = Logger(logPlace: MainTableTableViewController.self)
     let projectRepository = ProjectRepository.sharedInstance
     let projectAll = ProjectRepository.sharedInstance.findAll()
-    let colorManager = ColorManager()
+    private let colorManager = ColorManager.sharedInstance
+    private let fontManager = FontManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class MainTableTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainCell
         let project = projectAll[indexPath.row]
         cell.selectionStyle = .none
+        cell.projectName.font = UIFont(name: fontManager.mainFontName, size: 25.0)
         cell.projectName.text = project.name
         cell.startDate.text = "시작일 \(project.startDate.getYYMMDD())"
         let achievementRate = projectRepository.achievementRate(project: project)

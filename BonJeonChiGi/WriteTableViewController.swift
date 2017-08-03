@@ -12,6 +12,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     
     private let log = Logger(logPlace: WriteTableViewController.self)
     private let projectRepository = ProjectRepository.sharedInstance
+    private let colorManager = ColorManager.sharedInstance
     private var callPickerIndexPath:IndexPath? = nil
     private var selectDate = TimeInterval().now()
     private var selectCycle = 0
@@ -150,7 +151,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         let headerBounds = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40.0)
         let sectionView = WriteSection(frame: headerBounds, title: getWriteKeys()[section]!, section: section)
         sectionView.delegate = self
-        sectionView.backgroundColor = .black
+        sectionView.backgroundColor = colorManager.writeSection
         if 0 == section {
             sectionView.isHideButton(status: true)
         }

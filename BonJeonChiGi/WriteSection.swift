@@ -17,6 +17,7 @@ class WriteSection: UIView {
     private let log = Logger(logPlace: WriteSection.self)
     private var section:Int = 0
     private var addButton = UIButton()
+    private let colorManager = ColorManager.sharedInstance
     var delegate:WriteSectionDelegate?
     
     init(frame: CGRect, title:String, section:Int) {
@@ -35,13 +36,12 @@ class WriteSection: UIView {
         let height = self.frame.height
         let titleLabel = UILabel(frame: CGRect(x: offsetX, y: 0, width: width*0.7, height: height))
         titleLabel.text = title
-        titleLabel.backgroundColor = .blue
         self.addSubview(titleLabel)
         
         addButton = UIButton(frame: CGRect(x: titleLabel.frame.width, y: 0, width: width*0.3, height: height))
         addButton.setTitle("add", for: .normal)
         addButton.addTarget(self, action: #selector(WriteSection.add), for: UIControlEvents.touchUpInside)
-        addButton.backgroundColor = .red
+        addButton.backgroundColor = colorManager.cellAddButton
         self.addSubview(addButton)
     }
     

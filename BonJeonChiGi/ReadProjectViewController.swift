@@ -16,7 +16,7 @@ class ReadPageMissionCell: UITableViewCell {
 class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableview: UITableView!
-    
+    private let colorManager = ColorManager.sharedInstance
     private let log = Logger(logPlace: ReadProjectViewController.self)
     private let projectRepositroy = ProjectRepository.sharedInstance
     var selectProject:Project?
@@ -26,7 +26,6 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .black
         tableview.delegate = self
         tableview.dataSource = self
@@ -67,7 +66,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let editAction = UITableViewRowAction(style: .normal, title: "history") { (rowAction, indexPath) in
+        let historyAction = UITableViewRowAction(style: .normal, title: "history") { (rowAction, indexPath) in
             let missionHistroyTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "MissionHistoryTableViewController") as! MissionHistoryTableViewController
             if let mission = self.missionList?[indexPath.row] {
                 missionHistroyTableViewController.mission = mission
@@ -75,8 +74,8 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
             }
             self.navigationController?.pushViewController(missionHistroyTableViewController, animated: true)
         }
-        editAction.backgroundColor = .blue
-        return [editAction]
+        historyAction.backgroundColor = colorManager.historyAction
+        return [historyAction]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -157,12 +156,7 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     func missionCellSelectAnimation(cell:ReadPageMissionCell, select:Bool, completion: ((Bool) -> Void)?) {
         UIView.animate(withDuration: 0.3, animations: {
-            if true == select {
-                cell.backgroundColor = .red
-            }
-            else {
-                cell.backgroundColor = .white
-            }
+            cell.backgroundColor = self.colorManager.missionCellColor(isSelect: select)
         }, completion: completion)
     }
     
