@@ -38,15 +38,20 @@ class ColorManager: NSObject {
     let historyAction = UIColor(rgb: 0x1695A3)
     let writeSection = UIColor(rgb: 0xACF0F2)
     let cellAddButton = UIColor(rgb: 0x1695A3)
+    let navigation = UIColor(rgb: 0x334D5C)
     
     func getAchievementRateColor(achievementRate:Double) -> UIColor {
         if 100.0 <= achievementRate {
-            return UIColor(rgb: 0x375d81)
+            return UIColor(rgb: 0x45B29D)
         }
         else if 90.0 <= achievementRate {
-            return UIColor(rgb: 0xff5572)
+            return UIColor(rgb: 0xDF5A49)
         }
-        return UIColor(rgb: 0xf3f0d6)
+        return UIColor(rgb: 0xEFC94C)
+    }
+    
+    func getAchievementRateColorInCell(achievementRate:Double) -> UIColor {
+        return getAchievementRateColor(achievementRate: achievementRate).withAlphaComponent(0.15)
     }
     
     
@@ -59,7 +64,7 @@ class ColorManager: NSObject {
     
     func missionCellColor(isSelect:Bool) -> UIColor {
         if true == isSelect {
-            return .red
+            return UIColor(rgb: 0xBEEB9F)
         }
         return .white
     }

@@ -21,11 +21,11 @@ class MainTableTableViewController: UITableViewController {
     let projectRepository = ProjectRepository.sharedInstance
     let projectAll = ProjectRepository.sharedInstance.findAll()
     private let colorManager = ColorManager.sharedInstance
-    private let fontManager = FontManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -44,11 +44,11 @@ class MainTableTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainCell
         let project = projectAll[indexPath.row]
         cell.selectionStyle = .none
-        cell.projectName.font = UIFont(name: fontManager.mainFontName, size: 25.0)
         cell.projectName.text = project.name
         cell.startDate.text = "시작일 \(project.startDate.getYYMMDD())"
         let achievementRate = projectRepository.achievementRate(project: project)
         cell.achievementRate.text = "달성율 \(achievementRate)"
+        cell.backgroundColor = colorManager.getAchievementRateColorInCell(achievementRate: achievementRate)
         cell.achievementRateColor.backgroundColor = colorManager.getAchievementRateColor(achievementRate: achievementRate)
         return cell
     }
