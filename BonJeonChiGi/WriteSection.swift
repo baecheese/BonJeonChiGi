@@ -35,11 +35,13 @@ class WriteSection: UIView {
         let width = self.frame.width - offsetX
         let height = self.frame.height
         let titleLabel = UILabel(frame: CGRect(x: offsetX, y: 0, width: width*0.7, height: height))
+        titleLabel.font = UIFont(name: FontManager().name, size: CGFloat(FontManager().cellTitleLabelSize))
         titleLabel.text = title
         self.addSubview(titleLabel)
         
         addButton = UIButton(frame: CGRect(x: titleLabel.frame.width, y: 0, width: width*0.3, height: height))
         addButton.setTitle("add", for: .normal)
+        addButton.titleLabel?.font = UIFont(name: FontManager().name, size: CGFloat(FontManager().cellTitleLabelSize))
         addButton.addTarget(self, action: #selector(WriteSection.add), for: UIControlEvents.touchUpInside)
         addButton.backgroundColor = colorManager.cellAddButton
         self.addSubview(addButton)

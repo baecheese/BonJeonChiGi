@@ -33,12 +33,15 @@ class ColorManager: NSObject {
     
     private override init() {
         super.init()
+        
     }
     
+    let basicBackground = UIColor(rgb: 0xF5E09D)
     let historyAction = UIColor(rgb: 0x1695A3)
-    let writeSection = UIColor(rgb: 0xACF0F2)
+    let writeSection = UIColor(rgb: 0x45B29D)
     let cellAddButton = UIColor(rgb: 0x1695A3)
     let navigation = UIColor(rgb: 0x334D5C)
+    let tintColor = UIColor.white
     
     func getAchievementRateColor(achievementRate:Double) -> UIColor {
         if 100.0 <= achievementRate {
@@ -51,7 +54,13 @@ class ColorManager: NSObject {
     }
     
     func getAchievementRateColorInCell(achievementRate:Double) -> UIColor {
-        return getAchievementRateColor(achievementRate: achievementRate).withAlphaComponent(0.15)
+        if 100.0 <= achievementRate {
+            return UIColor(rgb: 0xBCE8E0)
+        }
+        else if 90.0 <= achievementRate {
+            return UIColor(rgb: 0xF0C5C0)
+        }
+        return UIColor(rgb: 0xFFEEBA)
     }
     
     

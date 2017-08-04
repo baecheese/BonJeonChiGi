@@ -24,6 +24,8 @@ class MainTableTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: FontManager().name, size: CGFloat(FontManager().navigationBarSize))!]
+        tableView.backgroundColor = colorManager.basicBackground
     }
     
     override func didReceiveMemoryWarning() {

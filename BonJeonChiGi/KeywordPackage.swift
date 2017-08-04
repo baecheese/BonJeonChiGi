@@ -55,3 +55,9 @@ struct ChoiceList {
     let cycleNumber = [0, 1, 7, 30]
 }
 
+struct FontManager {
+    let name = "SeoulHangangB"
+    let navigationBarSize = 20.0
+    let cellTitleLabelSize = 15.0
+}
+

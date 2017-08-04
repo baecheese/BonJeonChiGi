@@ -26,6 +26,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     override func viewDidLoad() {
         super.viewDidLoad()
         makeNavigationItem()
+        tableView.backgroundColor = colorManager.basicBackground
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,8 +35,9 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     
     func makeNavigationItem()  {
         let backBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-        backBtn.backgroundColor = .black
+        backBtn.backgroundColor = .clear
         backBtn.setTitle("save", for: .normal)
+        backBtn.titleLabel?.font = UIFont(name: FontManager().name, size: CGFloat(FontManager().navigationBarSize))
         backBtn.addTarget(self, action: #selector(WriteTableViewController.save), for: .touchUpInside)
         let item = UIBarButtonItem(customView: backBtn)
         navigationItem.rightBarButtonItem = item
@@ -195,12 +197,19 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let callPickerCell = callPickerIndexPath {
+            if indexPath == IndexPath(row: callPickerCell.row+1, section: callPickerCell.section) {
+                return 100.0
+            }
+        }
         return 60.0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if 0 == indexPath.section && 0 != indexPath.row {
-            return setProjectNameSectionCell(indexPath: indexPath)
+            let cellInProjectSection = setProjectNameSectionCell(indexPath: indexPath)
+            cellInProjectSection.backgroundColor = colorManager.basicBackground
+            return cellInProjectSection
         }
         let writeTableViewCell = Bundle.main.loadNibNamed("WriteTableViewCell", owner: self, options: nil)?.first as! WriteTableViewCell
         if 0 == indexPath.section && 0 == indexPath.row {
@@ -210,6 +219,7 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         writeTableViewCell.selectionStyle = .none
         writeTableViewCell.name.text = nil
         writeTableViewCell.value.text = nil
+        writeTableViewCell.backgroundColor = colorManager.basicBackground
         return writeTableViewCell
     }
     
@@ -344,6 +354,12 @@ class WriteTableViewController: UITableViewController, WriteSectionDelegate, Wri
         tableView.deleteRows(at: [pickerIndexPath], with: .fade)
     }
 
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if 0 != indexPath.section {
+            return true
+        }
+        return false
+    }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if 0 != indexPath.section {
