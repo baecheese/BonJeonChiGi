@@ -43,6 +43,9 @@ class ColorManager: NSObject {
     let navigation = UIColor(rgb: 0x334D5C)
     let tintColor = UIColor.white
     
+    let selectTitle = UIColor(rgb: 0xDF5A49)
+    let deselectTitle = UIColor.black
+    
     func getAchievementRateColor(achievementRate:Double) -> UIColor {
         if 100.0 <= achievementRate {
             return UIColor(rgb: 0x45B29D)

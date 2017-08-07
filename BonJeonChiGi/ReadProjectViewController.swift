@@ -136,8 +136,10 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
             })
             let more = UIAlertAction(title: message.more, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-                self.log.info(message: "push mission more")
-                self.missionCellSelectAnimation(cell: cell, select: false, completion: nil)
+                self.missionCellSelectAnimation(cell: cell, select: false, completion: { (Bool) in
+                    let writeDetailMissionHistoryVC = self.storyboard?.instantiateViewController(withIdentifier: "WriteDetailMissionHistoryTableViewController") as! WriteDetailMissionHistoryTableViewController
+                    self.navigationController?.pushViewController(writeDetailMissionHistoryVC, animated: true)
+                })
             })
             
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: {

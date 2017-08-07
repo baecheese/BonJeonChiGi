@@ -17,6 +17,13 @@
 		032809F31F1DEE0300958614 /* SelectSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032809F11F1DEE0300958614 /* SelectSheetCell.xib */; };
 		032809F81F1DF07D00958614 /* WriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032809F61F1DF07D00958614 /* WriteTableViewCell.swift */; };
 		032809F91F1DF07D00958614 /* WriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 032809F71F1DF07D00958614 /* WriteTableViewCell.xib */; };
+		034140631F37599700974462 /* SelectMissionSuccessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034140611F37599700974462 /* SelectMissionSuccessTableViewCell.swift */; };
+		034140641F37599700974462 /* SelectMissionSuccessTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034140621F37599700974462 /* SelectMissionSuccessTableViewCell.xib */; };
+		034140671F3810D600974462 /* TextFiledTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034140651F3810D600974462 /* TextFiledTableViewCell.swift */; };
+		034140681F3810D600974462 /* TextFiledTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034140661F3810D600974462 /* TextFiledTableViewCell.xib */; };
+		0341406A1F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034140691F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift */; };
+		0341406C1F3821B500974462 /* deselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341406B1F3821B500974462 /* deselect.png */; };
+		0341406E1F3821BC00974462 /* select.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341406D1F3821BC00974462 /* select.png */; };
 		034CD7841F223D3C00AF33A2 /* ReadProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CD7831F223D3C00AF33A2 /* ReadProjectViewController.swift */; };
 		034CD7881F2749CE00AF33A2 /* MissionHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CD7871F2749CE00AF33A2 /* MissionHistoryTableViewController.swift */; };
 		037453F31F204AB200FD698F /* TimeExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037453F21F204AB200FD698F /* TimeExtenstion.swift */; };
@@ -46,6 +53,13 @@
 		032809F11F1DEE0300958614 /* SelectSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectSheetCell.xib; sourceTree = "<group>"; };
 		032809F61F1DF07D00958614 /* WriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTableViewCell.swift; sourceTree = "<group>"; };
 		032809F71F1DF07D00958614 /* WriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WriteTableViewCell.xib; sourceTree = "<group>"; };
+		034140611F37599700974462 /* SelectMissionSuccessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMissionSuccessTableViewCell.swift; sourceTree = "<group>"; };
+		034140621F37599700974462 /* SelectMissionSuccessTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectMissionSuccessTableViewCell.xib; sourceTree = "<group>"; };
+		034140651F3810D600974462 /* TextFiledTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFiledTableViewCell.swift; sourceTree = "<group>"; };
+		034140661F3810D600974462 /* TextFiledTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFiledTableViewCell.xib; sourceTree = "<group>"; };
+		034140691F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteDetailMissionHistoryTableViewController.swift; sourceTree = "<group>"; };
+		0341406B1F3821B500974462 /* deselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deselect.png; sourceTree = "<group>"; };
+		0341406D1F3821BC00974462 /* select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select.png; sourceTree = "<group>"; };
 		034CD7831F223D3C00AF33A2 /* ReadProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadProjectViewController.swift; sourceTree = "<group>"; };
 		034CD7871F2749CE00AF33A2 /* MissionHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionHistoryTableViewController.swift; sourceTree = "<group>"; };
 		037453F21F204AB200FD698F /* TimeExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeExtenstion.swift; sourceTree = "<group>"; };
@@ -84,6 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				030D4D071F33160000C24775 /* SeoulHangangB.otf */,
+				0341406B1F3821B500974462 /* deselect.png */,
+				0341406D1F3821BC00974462 /* select.png */,
 			);
 			name = resource;
 			sourceTree = "<group>";
@@ -113,6 +129,7 @@
 				03177ABC1F04C9BB00886C29 /* WriteTableViewController.swift */,
 				034CD7831F223D3C00AF33A2 /* ReadProjectViewController.swift */,
 				034CD7871F2749CE00AF33A2 /* MissionHistoryTableViewController.swift */,
+				034140691F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -169,6 +186,10 @@
 			children = (
 				032809F61F1DF07D00958614 /* WriteTableViewCell.swift */,
 				032809F71F1DF07D00958614 /* WriteTableViewCell.xib */,
+				034140611F37599700974462 /* SelectMissionSuccessTableViewCell.swift */,
+				034140621F37599700974462 /* SelectMissionSuccessTableViewCell.xib */,
+				034140651F3810D600974462 /* TextFiledTableViewCell.swift */,
+				034140661F3810D600974462 /* TextFiledTableViewCell.xib */,
 				032809F01F1DEE0300958614 /* SelectSheetCell.swift */,
 				032809F11F1DEE0300958614 /* SelectSheetCell.xib */,
 				03E7C5931F1F26F400B60525 /* PickerViewTableViewCell.swift */,
@@ -263,8 +284,12 @@
 				03E7C5A01F1F537300B60525 /* DateTableViewCell.xib in Resources */,
 				032809F31F1DEE0300958614 /* SelectSheetCell.xib in Resources */,
 				037C81651ECFE25400D37ACD /* Assets.xcassets in Resources */,
+				0341406C1F3821B500974462 /* deselect.png in Resources */,
+				034140641F37599700974462 /* SelectMissionSuccessTableViewCell.xib in Resources */,
+				034140681F3810D600974462 /* TextFiledTableViewCell.xib in Resources */,
 				037C81631ECFE25400D37ACD /* Main.storyboard in Resources */,
 				03E7C5961F1F26F400B60525 /* PickerViewTableViewCell.xib in Resources */,
+				0341406E1F3821BC00974462 /* select.png in Resources */,
 				032809F91F1DF07D00958614 /* WriteTableViewCell.xib in Resources */,
 				030D4D081F33160000C24775 /* SeoulHangangB.otf in Resources */,
 			);
@@ -325,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				034140631F37599700974462 /* SelectMissionSuccessTableViewCell.swift in Sources */,
 				037C815E1ECFE25400D37ACD /* AppDelegate.swift in Sources */,
 				032809F81F1DF07D00958614 /* WriteTableViewCell.swift in Sources */,
 				039E72831F011D4C00DBD0AE /* SharedMemoryContext.swift in Sources */,
@@ -332,6 +358,7 @@
 				03177AC11F060E1500886C29 /* WriteSection.swift in Sources */,
 				034CD7881F2749CE00AF33A2 /* MissionHistoryTableViewController.swift in Sources */,
 				03E7C5951F1F26F400B60525 /* PickerViewTableViewCell.swift in Sources */,
+				034140671F3810D600974462 /* TextFiledTableViewCell.swift in Sources */,
 				037453F31F204AB200FD698F /* TimeExtenstion.swift in Sources */,
 				030D4CFD1F31C6D200C24775 /* ColorManager.swift in Sources */,
 				03E7C59F1F1F537300B60525 /* DateTableViewCell.swift in Sources */,
@@ -341,6 +368,7 @@
 				032809F21F1DEE0300958614 /* SelectSheetCell.swift in Sources */,
 				03177ABF1F0606F100886C29 /* Logger.swift in Sources */,
 				0388825A1F17644D00334E63 /* Project.swift in Sources */,
+				0341406A1F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift in Sources */,
 				0388825C1F176B4500334E63 /* ProjectRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

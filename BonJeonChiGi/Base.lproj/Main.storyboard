@@ -292,6 +292,34 @@
             </objects>
             <point key="canvasLocation" x="1645.5999999999999" y="194.75262368815595"/>
         </scene>
+        <!--Write Detail Mission History Table View Controller-->
+        <scene sceneID="URt-Va-6bI">
+            <objects>
+                <tableViewController storyboardIdentifier="WriteDetailMissionHistoryTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wc8-go-h9C" customClass="WriteDetailMissionHistoryTableViewController" customModule="BonJeonChiGi" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="9aa-Yj-mXx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EG5-B1-QfG">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EG5-B1-QfG" id="J7H-fY-MbY">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Wc8-go-h9C" id="avA-U7-DT5"/>
+                            <outlet property="delegate" destination="Wc8-go-h9C" id="etR-mN-fsl"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SXg-zD-V5f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2530" y="173"/>
+        </scene>
         <!--Write Table View Controller-->
         <scene sceneID="yNh-7t-hJh">
             <objects>

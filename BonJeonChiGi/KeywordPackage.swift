@@ -30,6 +30,9 @@ struct ProgressNames {
         , ProgressKey.achievementRate:"달성율"
         , ProgressKey.missionSuccessTotal:"성과"
         , ProgressKey.expectedBonJeonDay:"예상 완료 일"
+        , ProgressKey.count : "횟수"
+        , ProgressKey.comment : "코멘트"
+        , ProgressKey.isSuccess : "미션을 성공하셨습니까?"
         
     ]
 }
@@ -45,6 +48,9 @@ enum ProgressKey {
     case achievementRate
     case missionSuccessTotal
     case expectedBonJeonDay
+    case isSuccess
+    case count
+    case comment
     case error
 }
 
