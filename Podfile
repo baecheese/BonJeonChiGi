@@ -7,6 +7,8 @@ target 'BonJeonChiGi' do
 
   # Pods for BonJeonChiGi
 
+  pod 'ScrollableGraphView'
+
   pod 'RealmSwift'
   post_install do |installer|
   	installer.pods_project.targets.each do |target|

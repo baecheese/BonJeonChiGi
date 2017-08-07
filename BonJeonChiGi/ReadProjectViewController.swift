@@ -88,9 +88,11 @@ class ReadProjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     func setProgressNotice() {
         if let project = selectProject {
-            let names = ProgressNames()
-            log.info(message: project.startDate.getYYMMDD())
-            notice.text = "\(names.get[ProgressKey.expectedBonJeonDay]!):\(getExpectHitBonJeonDay(project: project)) \n\(names.get[ProgressKey.goalTotal]!):\(project.getGoalTotal()) \n\(names.get[ProgressKey.missionSuccessTotal]!):\(project.getSuccessMissionTotal()) \n \(names.get[ProgressKey.achievementRate]!):\(projectRepositroy.achievementRate(project: project))%"
+            let graph = TotalGraphView(frame: notice.frame)
+            notice.addSubview(graph)
+//            let names = ProgressNames()
+//            log.info(message: project.startDate.getYYMMDD())
+//            notice.text = "\(names.get[ProgressKey.expectedBonJeonDay]!):\(getExpectHitBonJeonDay(project: project)) \n\(names.get[ProgressKey.goalTotal]!):\(project.getGoalTotal()) \n\(names.get[ProgressKey.missionSuccessTotal]!):\(project.getSuccessMissionTotal()) \n \(names.get[ProgressKey.achievementRate]!):\(projectRepositroy.achievementRate(project: project))%"
         }
     }
     

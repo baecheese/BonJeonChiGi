@@ -24,6 +24,7 @@
 		0341406A1F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034140691F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift */; };
 		0341406C1F3821B500974462 /* deselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341406B1F3821B500974462 /* deselect.png */; };
 		0341406E1F3821BC00974462 /* select.png in Resources */ = {isa = PBXBuildFile; fileRef = 0341406D1F3821BC00974462 /* select.png */; };
+		034140721F38366A00974462 /* TotalGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034140711F38366A00974462 /* TotalGraphView.swift */; };
 		034CD7841F223D3C00AF33A2 /* ReadProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CD7831F223D3C00AF33A2 /* ReadProjectViewController.swift */; };
 		034CD7881F2749CE00AF33A2 /* MissionHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CD7871F2749CE00AF33A2 /* MissionHistoryTableViewController.swift */; };
 		037453F31F204AB200FD698F /* TimeExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037453F21F204AB200FD698F /* TimeExtenstion.swift */; };
@@ -60,6 +61,7 @@
 		034140691F3812B900974462 /* WriteDetailMissionHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteDetailMissionHistoryTableViewController.swift; sourceTree = "<group>"; };
 		0341406B1F3821B500974462 /* deselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deselect.png; sourceTree = "<group>"; };
 		0341406D1F3821BC00974462 /* select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select.png; sourceTree = "<group>"; };
+		034140711F38366A00974462 /* TotalGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalGraphView.swift; sourceTree = "<group>"; };
 		034CD7831F223D3C00AF33A2 /* ReadProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadProjectViewController.swift; sourceTree = "<group>"; };
 		034CD7871F2749CE00AF33A2 /* MissionHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionHistoryTableViewController.swift; sourceTree = "<group>"; };
 		037453F21F204AB200FD698F /* TimeExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeExtenstion.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				03177AC01F060E1500886C29 /* WriteSection.swift */,
+				034140711F38366A00974462 /* TotalGraphView.swift */,
 				03E7C58E1F1F17B100B60525 /* Custom Cell */,
 			);
 			name = View;
@@ -350,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				034140721F38366A00974462 /* TotalGraphView.swift in Sources */,
 				034140631F37599700974462 /* SelectMissionSuccessTableViewCell.swift in Sources */,
 				037C815E1ECFE25400D37ACD /* AppDelegate.swift in Sources */,
 				032809F81F1DF07D00958614 /* WriteTableViewCell.swift in Sources */,
